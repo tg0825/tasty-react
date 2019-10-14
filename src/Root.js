@@ -1,12 +1,12 @@
 import React from 'react'
 import './style.scss';
-import Button from './Button';
+import Counter from './components/Counter';
 
 class Root extends React.Component {
     render () {
         return (
             <div>
-                <Button/>
+                <Counter/>
             </div>
         )
     }
