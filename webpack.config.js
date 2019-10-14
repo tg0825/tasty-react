@@ -10,6 +10,7 @@ module.exports = {
         path: path.resolve(__dirname + '/build')
     },
     devServer: {
+        historyApiFallback: true,
         contentBase: path.resolve('./build'),
         index: 'index.html',
         port: 9000
