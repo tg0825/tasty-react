@@ -10,12 +10,13 @@ import {
     Switch
 } from 'react-router-dom';
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 
 import {Provider} from 'react-redux';
+import middleware from './middleware';
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(middleware));
 
 const About = () => {
     return <div>about</div>;
