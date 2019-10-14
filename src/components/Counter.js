@@ -51,10 +51,10 @@ const mapStateToProps = (state) => {
 const mapDispatchProps = (dispatch) => {
     return {
         handleIncrement: () => {
-            dispatch(actions.increment())
+            dispatch(actions.incrementAsync())
         },
         handleDecrement: () => {
-            dispatch(actions.decrement())
+            dispatch(actions.decrementAsync())
         },
         handleSetColor: (color) => {
             dispatch(actions.setColor(color))

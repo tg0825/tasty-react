@@ -18,3 +18,19 @@ export function setColor(color) {
         color
     };
 }
+
+export function incrementAsync() {
+    return (dispatch, getStage) => {
+        setTimeout(() => {
+            dispatch(increment());
+        }, 1000);
+    }
+}
+
+export function decrementAsync() {
+    return (dispatch, getStage) => {
+        setTimeout(() => {
+            dispatch(decrement());
+        }, 1000);
+    }
+}

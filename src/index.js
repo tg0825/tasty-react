@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Root from './Root';
-
+import {createLogger} from 'redux-logger';
 import {
     BrowserRouter as Router, 
     Route,
@@ -15,8 +15,10 @@ import reducers from './reducers';
 
 import {Provider} from 'react-redux';
 import middleware from './middleware';
+import ReduxThunk from 'redux-thunk';
 
-const store = createStore(reducers, applyMiddleware(middleware));
+const logger = createLogger();
+const store = createStore(reducers, applyMiddleware(logger, ReduxThunk));
 
 const About = () => {
     return <div>about</div>;
