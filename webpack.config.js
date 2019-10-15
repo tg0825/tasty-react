@@ -9,6 +9,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname + '/build')
     },
+	devtool: 'eval-source-map', 
     devServer: {
         historyApiFallback: true,
         contentBase: path.resolve('./build'),
