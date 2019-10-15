@@ -8,7 +8,7 @@ class Post extends React.Component {
         if (!confirm('delete?')) return false;
         
         this.props.deletePost(id)
-        .thne((res)=>{
+        .then((res)=>{
             console.log(res);
             alert('success');
         });
@@ -25,6 +25,13 @@ class Post extends React.Component {
                 <div>
                     {title}
                 </div>
+                <div className="post-button">
+                    <ul>
+                        <li><Link to={`/post/${id}`}> Show </Link></li>
+                        <li><Link to={`/edit/${id}`}> Edit </Link></li>
+                        <li><Link to="#" onClick={this.confirm} className="btn btn-danger">Delete</Link></li>
+                    </ul>
+                </div> 
             </div>
         )
     }

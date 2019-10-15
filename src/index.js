@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Root from './Root';
+import axios from 'axios';
 import {createLogger} from 'redux-logger';
 import {
     BrowserRouter as Router, 
@@ -40,6 +41,19 @@ import Form from './components/Form';
 class App extends React.Component {
     state = {  
         posts: []
+    }    
+    
+    componentDidMount() {
+        this.getPost();
+    }
+    
+    getPost = () => {
+        axios.get(`https://jsonplaceholder.typicode.com/posts`)
+        .then( res => {
+            this.setState({
+                posts: res.data
+            }) 
+        })
     }    
     
     deletePost = (id) => {
