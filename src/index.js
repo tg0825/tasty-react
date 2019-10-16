@@ -31,7 +31,8 @@ class App extends React.Component {
                 <Navigation/>
                 <Switch>
                     <Route exact path="/" component={Posts} />
-                    <Route exact path="/post/:postId" render={ (props) => {
+                    <Route exact path="/post/:postId" component={SinglePostRedux} />
+                    <Route exact path="/post1/:postId" render={ (props) => {
                             let idPost = props.location.pathname.replace('/post/', '');
                             
                             const posts=this.state.posts;
