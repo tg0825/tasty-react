@@ -1,4 +1,5 @@
 import * as types from './ActionTypes';
+import axios from 'axios';
 
 export function increment() {
     return {
@@ -33,4 +34,32 @@ export function decrementAsync() {
             dispatch(decrement());
         }, 1000);
     }
+}
+
+export function getPost(payload) {
+    return {
+        type: types.GET_POST,
+        payload
+    };
+}
+
+export function asyncGetPost() {
+    return (dispatch, getState) => {
+        axios.get(`https://jsonplaceholder.typicode.com/posts`)
+        .then( res => {
+            dispatch(getPost(res.data));
+        })
+    }
+}
+
+export function add_post() {
+    return {
+        type: types.ADD_POST
+    };
+}
+
+export function delete_post() {
+    return {
+        type: types.DELETE_POST
+    };
 }

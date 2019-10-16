@@ -1,6 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import Post from './Post';
+import * as actions from '../actions';
 
 class Listing extends React.Component {
     showPosts = () => {
@@ -8,12 +10,8 @@ class Listing extends React.Component {
         if (posts.length === 0) return null;
         return (
             <div>
-                {Object.keys(posts).map(post => (
-                    <Post 
-                        key={post}
-                        info={this.props.posts[post]}
-                        deletePost={this.props.deletePost}
-                    />
+                {posts.map((post, idx) => (
+                    <Post key={idx} info={post} />
                 ))}
             </div>
         )
@@ -28,4 +26,4 @@ class Listing extends React.Component {
     }
 }
 
-export default Listing;
+export default connect()(Listing);
