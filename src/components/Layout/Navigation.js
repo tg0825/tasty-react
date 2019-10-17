@@ -6,10 +6,10 @@ const Navigation = () => {
         <div>
         	<ul>
                 <li>
-                    <NavLink activeClassName="active" to='/'>list</NavLink>
+                    <NavLink activeClassName="active" to='/'>목록</NavLink>
                 </li>
                 <li>
-                    <NavLink activeClassName="active" to='/create'>create</NavLink>
+                    <NavLink activeClassName="active" to='/create'>추가</NavLink>
                 </li>
             </ul>
         </div>

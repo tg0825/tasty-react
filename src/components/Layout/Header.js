@@ -3,7 +3,7 @@ import React from 'react';
 export default () => {
     return (
         <div>
-            header
+            사내맛집
         </div>
     );
 };
