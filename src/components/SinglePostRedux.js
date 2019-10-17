@@ -1,49 +1,57 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {} from '../actions';
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 
 class SinglePostRedux extends React.Component {
-    let idPost = props.location.pathname.replace('/post/', '');
+    componentDidMount() {
+        this.props.asyncGetPost();
+    }
     
-    const posts=this.state.posts;
-    let filter;
-    filter = posts.filter(post => (
-        post.id === Number(idPost)
-    ));
-    
-    showPost = (props) => {
-        if (!props.post) return null;
+    showPost = (post) => {
+        if (!post) return null;
         
-        const {title, author} = this.props.post;
+        const {title, author, body} = post;
         
         return (
             <div>
                 <div>
+                    제목: 
                     {title}
                 </div>
                 <div>
+                    작성자: 
                     {author}
+                </div>
+                <div>
+                    내용
+                    {body}
                 </div>
             </div>
         );
     }
     
     render() {
+        let idPost = this.props.match.params.postId;
+        const {posts} = this.props;
+        let filter = posts.filter(post => (
+            post.id === Number(idPost)
+        ));
+    
         return (
             <div>
-                {this.showPost(this.props)}
+                {this.showPost(filter[0])}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-  postList: state.post.list
+  posts: state.post.list
 });
 
 const mapDispatchToProps = dispatch => ({
   asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
 });
 
-const SinglePostRedux = connect(mapStateToProps, mapDispatchToProps)(Posts);
-export default SinglePostRedux;
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);

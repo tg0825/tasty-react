@@ -2,8 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom';
 
 class Post extends React.Component {
-    confirm = () => {
-        const {id} = this.props.info;
+    confirm = (id) => {
         
         if (!confirm('delete?')) return false;
         
@@ -29,7 +28,7 @@ class Post extends React.Component {
                     <ul>
                         <li><Link to={`/post/${id}`}> Show </Link></li>
                         <li><Link to={`/edit/${id}`}> Edit </Link></li>
-                        <li><Link to="#" onClick={this.confirm} className="btn btn-danger">Delete</Link></li>
+                        <li><Link to="#" onClick={()=>this.confirm(id)} className="btn btn-danger">Delete</Link></li>
                     </ul>
                 </div> 
             </div>

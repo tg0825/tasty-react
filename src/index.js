@@ -16,7 +16,7 @@ const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
 import {Header, Navigation} from './components/Layout/Layout';
 import Posts from './components/Posts';
-import SinglePost from './components/SinglePost';
+import SinglePostRedux from './components/SinglePostRedux';
 import Form from './components/Form';
 
 const NotFound = () => (
@@ -31,24 +31,7 @@ class App extends React.Component {
                 <Navigation/>
                 <Switch>
                     <Route exact path="/" component={Posts} />
-                    <Route exact path="/post/:postId" component={SinglePostRedux} />
-                    <Route exact path="/post1/:postId" render={ (props) => {
-                            let idPost = props.location.pathname.replace('/post/', '');
-                            
-                            const posts=this.state.posts;
-                            let filter;
-                            filter = posts.filter(post => (
-                                post.id === Number(idPost)
-                            ));
-                            
-                            
-                            return(
-                                <SinglePost 
-                                    post={filter[0]} 
-                                    />
-                            );
-                        }} />            
-                        
+                    <Route exact path="/post/:postId" render={props => <SinglePostRedux {...props}/>} />
                     <Route exact path="/create" render={() => {
                             return(
                                 <Form 

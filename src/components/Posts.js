@@ -45,6 +45,4 @@ const mapDispatchToProps = dispatch => ({
   asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
 });
 
-const ConnectPosts = connect(mapStateToProps, mapDispatchToProps)(Posts);
-
-export default ConnectPosts;
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
