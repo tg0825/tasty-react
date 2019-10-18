@@ -14,10 +14,10 @@ import ReduxThunk from 'redux-thunk';
 
 const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
-import {Header, Navigation} from './components/Layout/Layout';
-import Posts from './components/Posts';
-import SinglePostRedux from './components/SinglePostRedux';
-import Form from './components/Form';
+import Posts from 'Comp/Posts';
+import SinglePostRedux from 'Comp/SinglePostRedux';
+import Form from 'Comp/Form';
+import {Header, Navigation} from 'Comp/Layout/Layout';
 
 const NotFound = () => (
     <div>404</div>
