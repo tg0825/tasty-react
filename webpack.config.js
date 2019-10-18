@@ -63,5 +63,10 @@ module.exports = {
             filename: 'style.css'
         }),
         new CleanWebpackPlugin()
-    ]
+    ],
+    resolve: {
+        alias: {
+            'Comp': path.resolve(__dirname, 'src/components/')
+        }
+    }
 }
