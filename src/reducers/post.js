@@ -10,6 +10,8 @@ export default function post(state = initialState, action) {
             return {
                 list: action.payload
             };
+        case types.ADD_POST:
+            return state;
         default:
             return state;
     }

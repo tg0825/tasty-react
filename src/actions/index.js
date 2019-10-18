@@ -52,10 +52,22 @@ export function asyncGetPost() {
     }
 }
 
-export function add_post() {
-    return {
-        type: types.ADD_POST
-    };
+export const createPost = (payload) => (dispatch, getStage) => {
+    axios.post(
+        `https://jsonplaceholder.typicode.com/posts`,
+        JSON.stringify(payload),
+        {
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then(res => {
+            alert('성공');
+            dispatch({
+                type: types.ADD_POST,
+                payload: res
+            });
+        })
 }
 
 export function delete_post() {

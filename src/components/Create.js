@@ -1,34 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux';
+import * as actions from '../actions';
 
-class Form extends React.Component {
-    authorRef = React.createRef();
+class Create extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    
+    bodyRef = React.createRef();
     titleRef = React.createRef();
     
     createPost = (e) => {
         e.preventDefault();
+        const {dispatch} = this.props;
  
         const post = {
-            author: this.authorRef.current.value,
             title: this.titleRef.current.value,
+            body: this.bodyRef.current.value,
         }
  
-        this.props.createPost(post);
+        dispatch(actions.createPost(post));
     }
     
     render () {
         return (
             <form onSubmit={this.createPost}>
                 <div>
-                    title
+                    제목
                     <input 
                         ref={this.titleRef}
                         type="text"/>
                 </div>
                 <div>
-                    author
+                    내용
                     <input 
-                        ref={this.titleRef}
+                        ref={this.bodyRef}
                         type="text"/>
                 </div>
                 <button type="submit">
@@ -39,4 +46,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default connect()(Create);
