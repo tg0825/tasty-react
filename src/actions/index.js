@@ -45,9 +45,10 @@ export function getPost(payload) {
 
 export function asyncGetPost() {
     return (dispatch, getState) => {
-        axios.get(`https://jsonplaceholder.typicode.com/posts`)
+        return axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then( res => {
             dispatch(getPost(res.data));
+            return res.data;
         })
     }
 }

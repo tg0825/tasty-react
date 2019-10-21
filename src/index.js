@@ -30,8 +30,9 @@ class App extends React.Component {
                 <Header/>
                 <Navigation/>
                 <Switch>
-                    <Route exact path="/" component={Posts} />
+                    <Route exact path="/" render={props=><Posts {...props}/>} />
                     <Route exact path="/post/:postId" render={props => <SinglePostRedux {...props}/>} />
+                    <Route exact path="/post/:postId/edit" render={props => <SinglePostRedux {...props} edit/>} />
                     <Route exact path="/create" render={props => <Create {...props}/>} />
                     
                     {/*<Route exact path="/edit/:postId" render={ (props) => {

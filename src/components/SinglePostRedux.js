@@ -5,8 +5,35 @@ import * as actions from '../actions';
 import {Link} from 'react-router-dom';
 
 class SinglePostRedux extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isEdit: props.edit,
+            title: '',
+            body: '',
+        }
+    }
+    
+    shouldComponentUpdate(nextProps, nextState){
+        // if (nextProps.isEdit !== nextState.isEdit) return true;
+        return true;
+    }    
+    
     componentDidMount() {
-        this.props.asyncGetPost();
+        const {match} = this.props;
+        const id = match.params.postId;
+        this.props.asyncGetPost()
+        .then(posts => {
+            const post = posts.filter(post => {
+                return post.id === Number(id);
+            });
+            const {title, body} = post[0];
+            this.setState({
+                title,
+                body
+            });
+            console.log(this);
+        });
     }
     
     confirm = (id) => {
@@ -36,24 +63,38 @@ class SinglePostRedux extends React.Component {
     showPost = ({post, id}) => {
         if (!post) return null;
         
-        const {title, author, body} = post;
+        const {isEdit = false, title, body} = this.state;
         
         return (
             <div>
                 <div>
                     제목: 
-                    {title}
-                </div>
-                <div>
-                    작성자: 
-                    {author}
+                    <input 
+                        type="text"
+                        value={title} 
+                        onChange={(e) => {
+                            const {value} = e.target;
+                            this.setState({
+                                title: value
+                            });
+                        }}
+                        readOnly={!isEdit}/>
                 </div>
                 <div>
                     본문:
-                    {body}
+                    <textarea 
+                        type="text"
+                        value={body}
+                        onChange={(e) => {
+                            const {value} = e.target;
+                            this.setState({
+                                body: value
+                            });
+                        }}
+                        readOnly={!isEdit}/>
                 </div>
                 <div className="post-button">
-                    <Link to={`/post/edit/${id}`}>수정</Link>
+                    <Link to={`/post/${id}/edit`}>수정</Link>
                     <Link 
                         to="#"
                         onClick={()=>this.confirm(id)} 
@@ -66,7 +107,7 @@ class SinglePostRedux extends React.Component {
     }
     
     render() {
-        const {posts, match} = this.props;
+        const {match, posts} = this.props;
         const id = match.params.postId;
         const post = posts.filter(post => (
             post.id === Number(id)
