@@ -2,13 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {Link} from 'react-router-dom';
 
 class SinglePostRedux extends React.Component {
     componentDidMount() {
         this.props.asyncGetPost();
     }
     
-    showPost = (post) => {
+    confirm = (id) => {
+        if (!confirm('delete?')) return false;
+        this.props.deletePost(id)
+        .then((res)=>{
+            console.log(res);
+            alert('success');
+        });
+    }
+    
+    deletePost = (id) => {
+        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(res => {
+            if (res.status === 200) {
+                const posts = [...this.state.posts];
+                let result = posts.filter(post => (
+                    post.id !== id
+                ));
+                this.setState({
+                    posts: result
+                })
+            } 
+        })
+    }    
+    
+    showPost = ({post, id}) => {
         if (!post) return null;
         
         const {title, author, body} = post;
@@ -24,23 +49,31 @@ class SinglePostRedux extends React.Component {
                     {author}
                 </div>
                 <div>
-                    내용
+                    본문:
                     {body}
                 </div>
+                <div className="post-button">
+                    <Link to={`/post/edit/${id}`}>수정</Link>
+                    <Link 
+                        to="#"
+                        onClick={()=>this.confirm(id)} 
+                        className="btn btn-danger">
+                        삭제
+                    </Link>
+                </div> 
             </div>
         );
     }
     
     render() {
-        let idPost = this.props.match.params.postId;
-        const {posts} = this.props;
-        let filter = posts.filter(post => (
-            post.id === Number(idPost)
+        const {posts, match} = this.props;
+        const id = match.params.postId;
+        const post = posts.filter(post => (
+            post.id === Number(id)
         ));
-    
         return (
             <div>
-                {this.showPost(filter[0])}
+                {this.showPost({post: post[0], id})}
             </div>
         )
     }

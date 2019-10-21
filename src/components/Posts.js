@@ -9,28 +9,11 @@ class Posts extends React.Component {
         this.props.asyncGetPost();
     }
     
-    deletePost = (id) => {
-        //console.log(id);
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(res => {
-            if (res.status === 200) {
-                const posts = [...this.state.posts];
-                let result = posts.filter(post => (
-                    post.id !== id
-                ));
-                this.setState({
-                    posts: result
-                })
-            } 
-        })
-    }    
-    
     render() {
         return (
             <div>
                 <Listing
                     posts={this.props.postList}
-                    deletePost={this.props.deletePost}
                     />
             </div>
         )
