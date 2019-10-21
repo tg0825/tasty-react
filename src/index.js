@@ -30,10 +30,10 @@ class App extends React.Component {
                 <Header/>
                 <Navigation/>
                 <Switch>
-                    <Route exact path="/" render={props=><Posts {...props}/>} />
-                    <Route exact path="/post/:postId" render={props => <SinglePostRedux {...props}/>} />
-                    <Route exact path="/post/:postId/edit" render={props => <SinglePostRedux {...props} edit/>} />
-                    <Route exact path="/create" render={props => <Create {...props}/>} />
+                    <Route key="main" exact path="/" render={props=><Posts {...props}/>} />
+                    <Route key="view" exact path="/post/:postId" render={props => <SinglePostRedux {...props}/>} />
+                    <Route key="edit" exact path="/post/:postId/edit" render={props => <SinglePostRedux {...props} edit/>} />
+                    <Route key="create" exact path="/create" render={props => <Create {...props}/>} />
                     
                     {/*<Route exact path="/edit/:postId" render={ (props) => {
                             let idPost = props.location.pathname.replace('/edit/', '');

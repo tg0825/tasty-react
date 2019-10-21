@@ -14,19 +14,18 @@ class SinglePostRedux extends React.Component {
         }
     }
     
-    shouldComponentUpdate(nextProps, nextState){
-        // if (nextProps.isEdit !== nextState.isEdit) return true;
-        return true;
-    }    
+    findPostById(posts, id) {
+        return posts.filter(post => {
+            return post.id === Number(id);
+        });
+    }
     
     componentDidMount() {
         const {match} = this.props;
         const id = match.params.postId;
         this.props.asyncGetPost()
         .then(posts => {
-            const post = posts.filter(post => {
-                return post.id === Number(id);
-            });
+            const post = this.findPostById(posts, id);
             const {title, body} = post[0];
             this.setState({
                 title,
@@ -94,13 +93,21 @@ class SinglePostRedux extends React.Component {
                         readOnly={!isEdit}/>
                 </div>
                 <div className="post-button">
-                    <Link to={`/post/${id}/edit`}>수정</Link>
-                    <Link 
-                        to="#"
-                        onClick={()=>this.confirm(id)} 
-                        className="btn btn-danger">
-                        삭제
-                    </Link>
+                    {
+                        isEdit
+                        ? <Link to={`/post/${id}/edit`}>완료</Link>
+                        : <Link to={`/post/${id}/edit`}>수정</Link>
+                    }
+                    {
+                        isEdit
+                        ? null
+                        : (<Link 
+                            to="#"
+                            onClick={()=>this.confirm(id)} 
+                            className="btn btn-danger">
+                            삭제
+                        </Link>)
+                    }
                 </div> 
             </div>
         );
@@ -109,9 +116,7 @@ class SinglePostRedux extends React.Component {
     render() {
         const {match, posts} = this.props;
         const id = match.params.postId;
-        const post = posts.filter(post => (
-            post.id === Number(id)
-        ));
+        const post = this.findPostById(posts, id);
         return (
             <div>
                 {this.showPost({post: post[0], id})}
