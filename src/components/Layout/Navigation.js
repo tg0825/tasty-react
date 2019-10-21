@@ -6,10 +6,7 @@ const Navigation = () => {
         <div>
         	<ul>
                 <li>
-                    <NavLink activeClassName="active" to='/'>목록</NavLink>
-                </li>
-                <li>
-                    <NavLink activeClassName="active" to='/create'>추가</NavLink>
+                    <NavLink activeClassName="active" to='/create'>맛집 추가</NavLink>
                 </li>
             </ul>
         </div>

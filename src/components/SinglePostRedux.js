@@ -93,6 +93,7 @@ class SinglePostRedux extends React.Component {
                         readOnly={!isEdit}/>
                 </div>
                 <div className="post-button">
+                    <Link to='/'>목록</Link>
                     {
                         isEdit
                         ? <Link to={`/post/${id}/edit`}>완료</Link>

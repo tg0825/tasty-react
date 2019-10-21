@@ -21,7 +21,7 @@ export function setColor(color) {
 }
 
 export function incrementAsync() {
-    return (dispatch, getStage) => {
+    return (dispatch, getState) => {
         setTimeout(() => {
             dispatch(increment());
         }, 1000);
@@ -29,7 +29,7 @@ export function incrementAsync() {
 }
 
 export function decrementAsync() {
-    return (dispatch, getStage) => {
+    return (dispatch, getState) => {
         setTimeout(() => {
             dispatch(decrement());
         }, 1000);
@@ -53,7 +53,7 @@ export function asyncGetPost() {
     }
 }
 
-export const createPost = (payload) => (dispatch, getStage) => {
+export const createPost = (payload) => (dispatch, getState) => {
     axios.post(
         `https://jsonplaceholder.typicode.com/posts`,
         JSON.stringify(payload),

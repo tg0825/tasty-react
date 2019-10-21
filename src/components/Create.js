@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {Link} from 'react-router-dom';
 
 class Create extends React.Component {
     constructor(props) {
@@ -38,9 +39,13 @@ class Create extends React.Component {
                         ref={this.bodyRef}
                         type="text"/>
                 </div>
-                <button type="submit">
-                    create
-                </button>
+                
+                <div className="post-button">
+                    <Link to='/'>목록</Link>
+                    <button type="submit">
+                        등록
+                    </button>
+                </div> 
             </form>
         )
     }
