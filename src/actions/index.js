@@ -49,8 +49,15 @@ export const createPost = (payload) => (dispatch, getState) => {
         })
 }
 
-export const deletePost = () => (dispatch, getState) => {
-    return {
-        type: types.DELETE_POST
-    };
+export const deletePost = (id) => (dispatch, getState) => {
+    return axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+    .then(res => {
+        if (res.status === 200) {
+            dispatch({
+                type:types.DELETE_POST,
+                payload: res
+            })
+        } 
+        return res;
+    })
 }

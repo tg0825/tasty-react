@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 class SinglePostRedux extends React.Component {
     constructor(props) {
@@ -11,6 +11,7 @@ class SinglePostRedux extends React.Component {
             isEdit: props.edit,
             title: '',
             body: '',
+            redirect: false
         }
         this.id = this.props.match.params.postId;
     }
@@ -26,29 +27,16 @@ class SinglePostRedux extends React.Component {
         });
     }
     
-    confirm = (id) => {
-        if (!confirm('delete?')) return false;
+    delete = (id) => {
+        if (!confirm('삭제 하시겠습니까?')) return false;
         this.props.deletePost(id)
         .then((res)=>{
-            console.log(res);
-            alert('success');
+            alert('삭제 되었습니다.');
+            this.setState({
+                redirect: true
+            });
         });
     }
-    
-    deletePost = (id) => {
-        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-        .then(res => {
-            if (res.status === 200) {
-                const posts = [...this.state.posts];
-                let result = posts.filter(post => (
-                    post.id !== id
-                ));
-                this.setState({
-                    posts: result
-                })
-            } 
-        })
-    }    
     
     showPost = () => {
         const {isEdit = false, title, body} = this.state;
@@ -93,8 +81,7 @@ class SinglePostRedux extends React.Component {
                         ? null
                         : (<Link 
                             to="#"
-                            onClick={()=>this.confirm(this.id)} 
-                            className="btn btn-danger">
+                            onClick={()=>this.delete(this.id)}>
                             삭제
                         </Link>)
                     }
@@ -104,6 +91,10 @@ class SinglePostRedux extends React.Component {
     }
     
     render() {
+        const { redirect } = this.state;
+        if (redirect) {
+            return <Redirect to='/'/>;
+        }
         return (
             <div>
                 {this.showPost()}
@@ -120,6 +111,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
+  deletePost: payload => dispatch(actions.deletePost(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);
