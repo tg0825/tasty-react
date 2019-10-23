@@ -1,73 +1,34 @@
 import * as types from './ActionTypes';
 import axios from 'axios';
 
-export function increment() {
-    return {
-        type: types.INCREMENT
-    };
-}
-
-export function decrement() {
-    return {
-        type: types.DECREMENT
-    };
-}
-
-export function setColor(color) {
-    return {
-        type: types.SET_COLOR,
-        color
-    };
-}
-
-export function incrementAsync() {
-    return (dispatch, getState) => {
-        setTimeout(() => {
-            dispatch(increment());
-        }, 1000);
-    }
-}
-
-export function decrementAsync() {
-    return (dispatch, getState) => {
-        setTimeout(() => {
-            dispatch(decrement());
-        }, 1000);
-    }
-}
-
-export function getPostList(payload) {
+export const getPostList = (payload) => {
     return {
         type: types.GET_POST_LIST,
         payload
     };
 }
 
-export function getPost(payload) {
+export const getPost = (payload) => {
     return {
         type: types.GET_POST,
         payload
     };
 }
 
-export function asyncGetPostList() {
-    return (dispatch, getState) => {
-        return axios.get(`https://jsonplaceholder.typicode.com/posts`)
+export const asyncGetPostList = () => (dispatch, getState) => {
+    return axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then( res => {
             dispatch(getPostList(res.data));
             return res.data;
         })
-    }
 }
 
-export function asyncGetPost(payload) {
-    return (dispatch, getState) => {
-        return axios.get(`https://jsonplaceholder.typicode.com/posts/${payload}`)
-        .then( res => {
+export const asyncGetPost = (payload) => (dispatch, getState) => {
+    return axios.get(`https://jsonplaceholder.typicode.com/posts/${payload}`)
+        .then(res => {
             dispatch(getPost(res.data));
             return res.data;
         })
-    }
 }
 
 export const createPost = (payload) => (dispatch, getState) => {
@@ -88,7 +49,7 @@ export const createPost = (payload) => (dispatch, getState) => {
         })
 }
 
-export function delete_post() {
+export const deletePost = () => (dispatch, getState) => {
     return {
         type: types.DELETE_POST
     };

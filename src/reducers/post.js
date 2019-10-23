@@ -18,6 +18,8 @@ export default function post(state = initialState, action) {
             };
         case types.ADD_POST:
             return state;
+        case types.DELETE_POST:
+            return state;
         default:
             return state;
     }

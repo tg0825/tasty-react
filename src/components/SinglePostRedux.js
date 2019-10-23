@@ -12,12 +12,11 @@ class SinglePostRedux extends React.Component {
             title: '',
             body: '',
         }
+        this.id = this.props.match.params.postId;
     }
     
     componentDidMount() {
-        const {match, post} = this.props;
-        const id = match.params.postId;
-        this.props.asyncGetPost(id)
+        this.props.asyncGetPost(this.id)
         .then(post => {
             const {title, body} = post;
             this.setState({
@@ -51,9 +50,7 @@ class SinglePostRedux extends React.Component {
         })
     }    
     
-    showPost = ({post, id}) => {
-        if (!post) return null;
-        
+    showPost = () => {
         const {isEdit = false, title, body} = this.state;
         
         return (
@@ -88,15 +85,15 @@ class SinglePostRedux extends React.Component {
                     <Link to='/'>맛집 목록</Link>
                     {
                         isEdit
-                        ? <Link to={`/post/${id}/edit`}>완료</Link>
-                        : <Link to={`/post/${id}/edit`}>수정</Link>
+                        ? <Link to={`/post/${this.id}/edit`}>완료</Link>
+                        : <Link to={`/post/${this.id}/edit`}>수정</Link>
                     }
                     {
                         isEdit
                         ? null
                         : (<Link 
                             to="#"
-                            onClick={()=>this.confirm(id)} 
+                            onClick={()=>this.confirm(this.id)} 
                             className="btn btn-danger">
                             삭제
                         </Link>)
@@ -107,11 +104,9 @@ class SinglePostRedux extends React.Component {
     }
     
     render() {
-        const {match, post} = this.props;
-        const id = match.params.postId;
         return (
             <div>
-                {this.showPost({post, id})}
+                {this.showPost()}
             </div>
         )
     }
