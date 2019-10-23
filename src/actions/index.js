@@ -43,11 +43,28 @@ export function getPostList(payload) {
     };
 }
 
+export function getPost(payload) {
+    return {
+        type: types.GET_POST,
+        payload
+    };
+}
+
 export function asyncGetPostList() {
     return (dispatch, getState) => {
         return axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then( res => {
             dispatch(getPostList(res.data));
+            return res.data;
+        })
+    }
+}
+
+export function asyncGetPost(payload) {
+    return (dispatch, getState) => {
+        return axios.get(`https://jsonplaceholder.typicode.com/posts/${payload}`)
+        .then( res => {
+            dispatch(getPost(res.data));
             return res.data;
         })
     }

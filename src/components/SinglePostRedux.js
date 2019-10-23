@@ -14,24 +14,16 @@ class SinglePostRedux extends React.Component {
         }
     }
     
-    findPostById(posts, id) {
-        return posts.filter(post => {
-            return post.id === Number(id);
-        });
-    }
-    
     componentDidMount() {
-        const {match} = this.props;
+        const {match, post} = this.props;
         const id = match.params.postId;
-        this.props.asyncGetPostList()
-        .then(posts => {
-            const post = this.findPostById(posts, id);
-            const {title, body} = post[0];
+        this.props.asyncGetPost(id)
+        .then(post => {
+            const {title, body} = post;
             this.setState({
                 title,
                 body
             });
-            console.log(this);
         });
     }
     
@@ -115,23 +107,24 @@ class SinglePostRedux extends React.Component {
     }
     
     render() {
-        const {match, posts} = this.props;
+        const {match, post} = this.props;
         const id = match.params.postId;
-        const post = this.findPostById(posts, id);
         return (
             <div>
-                {this.showPost({post: post[0], id})}
+                {this.showPost({post, id})}
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-  posts: state.post.list
-});
+const mapStateToProps = state => {
+    return {
+        post: state.post.currentPost
+    }
+};
 
 const mapDispatchToProps = dispatch => ({
-  asyncGetPostList: payload => dispatch(actions.asyncGetPostList(payload)),
+  asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);
