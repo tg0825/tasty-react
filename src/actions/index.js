@@ -36,18 +36,18 @@ export function decrementAsync() {
     }
 }
 
-export function getPost(payload) {
+export function getPostList(payload) {
     return {
-        type: types.GET_POST,
+        type: types.GET_POST_LIST,
         payload
     };
 }
 
-export function asyncGetPost() {
+export function asyncGetPostList() {
     return (dispatch, getState) => {
         return axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then( res => {
-            dispatch(getPost(res.data));
+            dispatch(getPostList(res.data));
             return res.data;
         })
     }

@@ -23,7 +23,7 @@ class SinglePostRedux extends React.Component {
     componentDidMount() {
         const {match} = this.props;
         const id = match.params.postId;
-        this.props.asyncGetPost()
+        this.props.asyncGetPostList()
         .then(posts => {
             const post = this.findPostById(posts, id);
             const {title, body} = post[0];
@@ -93,7 +93,7 @@ class SinglePostRedux extends React.Component {
                         readOnly={!isEdit}/>
                 </div>
                 <div className="post-button">
-                    <Link to='/'>목록</Link>
+                    <Link to='/'>맛집 목록</Link>
                     {
                         isEdit
                         ? <Link to={`/post/${id}/edit`}>완료</Link>
@@ -131,7 +131,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
+  asyncGetPostList: payload => dispatch(actions.asyncGetPostList(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);

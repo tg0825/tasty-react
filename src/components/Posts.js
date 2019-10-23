@@ -6,7 +6,7 @@ import * as actions from '../actions';
 
 class Posts extends React.Component {
     componentDidMount() {
-        this.props.asyncGetPost();
+        this.props.asyncGetPostList();
     }
     
     render() {
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
+  asyncGetPostList: payload => dispatch(actions.asyncGetPostList(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
