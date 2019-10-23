@@ -9,6 +9,7 @@ export default function post(state = initialState, action) {
     switch(action.type) {
         case types.GET_POST:
             return {
+                ...state,
                 currentPost: action.payload
             };
         case types.GET_POST_LIST:

@@ -1,31 +1,47 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Listing from './Listing';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
+import {Link} from 'react-router-dom';
 
 class Posts extends React.Component {
     componentDidMount() {
         this.props.asyncGetPostList();
     }
     
+    showPosts = (list) => (
+        <div>
+            {
+                list.map(({id, title}, idx) => (
+                    <div key={idx}>
+                        <Link to={`/post/${id}`}> 
+                            {id}:
+                            {title}
+                        </Link>
+                    </div>
+                ))
+            }
+        </div>
+    );
+            
     render() {
+        const list = this.props.list;
         return (
             <div>
-                <Listing
-                    posts={this.props.postList}
-                    />
+                <div className="post-list">
+                    {list.length === 0 ? null : this.showPosts(list)}
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = state => ({
-  postList: state.post.list
+  list: state.post.list
 });
 
 const mapDispatchToProps = dispatch => ({
-  asyncGetPostList: payload => dispatch(actions.asyncGetPostList(payload)),
+  asyncGetPostList: () => dispatch(actions.asyncGetPostList()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
