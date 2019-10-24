@@ -11,20 +11,39 @@ class SinglePostRedux extends React.Component {
             isEdit: props.edit,
             title: '',
             body: '',
-            redirect: false
+            redirect: false,
+            isNew: false
         }
         this.id = this.props.match.params.postId;
     }
     
     componentDidMount() {
+        this.update();
+    }
+    
+    update() {
         this.props.asyncGetPost(this.id)
         .then(post => {
             const {title, body} = post;
             this.setState({
                 title,
-                body
+                body,
+                isNew: false
             });
         });
+    }
+    
+    handlePatch = () => {
+        const {title} = this.state;
+        this.props.asyncPatchPost({
+            id: this.id,
+            title
+        })
+        .then(() => {
+            this.setState({
+                isNew: true
+            })
+        })
     }
     
     delete = (id) => {
@@ -73,7 +92,7 @@ class SinglePostRedux extends React.Component {
                     <Link to='/'>맛집 목록</Link>
                     {
                         isEdit
-                        ? <Link to={`/post/${this.id}/edit`}>완료</Link>
+                        ? <button type="button" onClick={this.handlePatch}>완료</button>
                         : <Link to={`/post/${this.id}/edit`}>수정</Link>
                     }
                     {
@@ -91,7 +110,12 @@ class SinglePostRedux extends React.Component {
     }
     
     render() {
-        const { redirect } = this.state;
+        const { redirect, isNew } = this.state;
+        
+        if (isNew) {
+            this.update();
+        }
+        
         if (redirect) {
             return <Redirect to='/'/>;
         }
@@ -111,7 +135,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   asyncGetPost: payload => dispatch(actions.asyncGetPost(payload)),
-  deletePost: payload => dispatch(actions.deletePost(payload))
+  deletePost: payload => dispatch(actions.deletePost(payload)),
+  asyncPatchPost: payload => dispatch(actions.asyncPatchPost(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);

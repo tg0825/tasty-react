@@ -12,7 +12,7 @@ class Create extends React.Component {
     bodyRef = React.createRef();
     titleRef = React.createRef();
     
-    createPost = (e) => {
+    addPost = (e) => {
         e.preventDefault();
         const {dispatch} = this.props;
  
@@ -21,12 +21,12 @@ class Create extends React.Component {
             body: this.bodyRef.current.value,
         }
  
-        dispatch(actions.createPost(post));
+        dispatch(actions.addPost(post));
     }
     
     render () {
         return (
-            <form onSubmit={this.createPost}>
+            <form onSubmit={this.addPost}>
                 <div>
                     제목
                     <input 

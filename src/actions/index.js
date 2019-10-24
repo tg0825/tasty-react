@@ -31,7 +31,28 @@ export const asyncGetPost = (payload) => (dispatch, getState) => {
         })
 }
 
-export const createPost = (payload) => (dispatch, getState) => {
+export const patchPost = (payload) => {
+    return {
+        type: types.PATCH_POST,
+        payload
+    }
+}
+
+export const asyncPatchPost = (payload) => (dispatch, getState) => {
+    return axios.patch(`https://jsonplaceholder.typicode.com/posts/${payload.id}`,
+        JSON.stringify(payload),
+        {
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            }
+        })
+        .then( res => {
+            dispatch(patchPost(res.data));
+            return res.data;
+        })
+}
+
+export const addPost = (payload) => (dispatch, getState) => {
     axios.post(
         `https://jsonplaceholder.typicode.com/posts`,
         JSON.stringify(payload),
