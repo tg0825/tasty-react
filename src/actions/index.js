@@ -8,19 +8,19 @@ export const getPostList = (payload) => {
     };
 }
 
-export const getPost = (payload) => {
-    return {
-        type: types.GET_POST,
-        payload
-    };
-}
-
 export const asyncGetPostList = () => (dispatch, getState) => {
     return axios.get(`https://jsonplaceholder.typicode.com/posts`)
         .then( res => {
             dispatch(getPostList(res.data));
             return res.data;
         })
+}
+
+export const getPost = (payload) => {
+    return {
+        type: types.GET_POST,
+        payload
+    };
 }
 
 export const asyncGetPost = (payload) => (dispatch, getState) => {
@@ -46,7 +46,7 @@ export const asyncPatchPost = (payload) => (dispatch, getState) => {
                 'Content-type': 'application/json; charset=UTF-8'
             }
         })
-        .then( res => {
+        .then(res => {
             dispatch(patchPost(res.data));
             return res.data;
         })

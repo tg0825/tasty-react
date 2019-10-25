@@ -20,6 +20,11 @@ export default function post(state = initialState, action) {
             return state;
         case types.DELETE_POST:
             return state;
+        case types.PATCH_POST:
+            return {
+                ...state,
+                currentPost: action.paylod
+            }
         default:
             return state;
     }
