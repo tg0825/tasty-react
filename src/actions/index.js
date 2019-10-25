@@ -65,7 +65,7 @@ export const addPost = (payload) => (dispatch, getState) => {
             alert('성공');
             dispatch({
                 type: types.ADD_POST,
-                payload: res
+                payload: res.data
             });
         })
 }
