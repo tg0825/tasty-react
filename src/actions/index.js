@@ -47,6 +47,7 @@ export const asyncPatchPost = (payload) => (dispatch, getState) => {
             }
         })
         .then(res => {
+            alert('수정 완료');
             dispatch(patchPost(res.data));
             return res.data;
         })
