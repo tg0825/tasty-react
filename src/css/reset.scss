@@ -5,4 +5,9 @@ body {
 
 a {
   color: $fontColorBase;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
