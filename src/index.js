@@ -19,7 +19,9 @@ const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
 import Posts from 'Comp/Posts';
 import SinglePostRedux from 'Comp/SinglePostRedux';
-import {Header, Navigation} from 'Comp/Layout/Layout';
+import Header from 'Comp/Layout/Header';
+import Navigation from 'Comp/Layout/Navigation';
+import Footer from 'Comp/Layout/Footer';
 
 const NotFound = () => (
     <div>404</div>
@@ -38,6 +40,7 @@ class App extends React.Component {
                     <Route key="create" exact path="/create" render={props => <SinglePostRedux {...props}/>} />
                     <Route component={NotFound} />
                 </Switch>
+                <Footer/>
             </Router>
         );
     }
