@@ -6,6 +6,7 @@ import {
     Switch
 } from 'react-router-dom';
 
+import 'normalize.css';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 
