@@ -1,10 +1,14 @@
-$fontColor: blue;
-$fontSize: 52px;
+// BEM
+.header {
+  border-bottom: 1px solid #000;
+  padding: 10px;
+  background: $keyColor;
+  color: #fff;
+}
 
 .title {
-  color: $fontColor;
+  color: $fontColorBase;
   font-size: $fontSize;
-  text-align: center;
 }
 
 .active {
