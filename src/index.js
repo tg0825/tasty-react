@@ -7,6 +7,8 @@ import {
 } from 'react-router-dom';
 
 import 'normalize.css';
+import './style.scss';
+
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
 

@@ -14,7 +14,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         publicPath: '/', // here's the change
-        contentBase: path.resolve(__dirname + '/build'),
+        // contentBase: path.resolve(__dirname + '/build'),
         index: 'index.html',
         port: 9000
     },
@@ -23,11 +23,17 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: [
+                    MiniCssExtractPlugin.loader, 
+                    'css-loader'
+                ]
             },
             {
                 test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+                use: [
+                    MiniCssExtractPlugin.loader, 
+                    'css-loader', 'sass-loader'
+                ]
             },
             {
                 test: /\.(js|jsx)$/,
