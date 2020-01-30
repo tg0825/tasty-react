@@ -1,11 +1,5 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import {
-    BrowserRouter as Router, 
-    Route,
-    Switch
-} from 'react-router-dom';
-
 import 'normalize.css';
 import './autoload.scss';
 
@@ -19,32 +13,35 @@ const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
 import Posts from 'Comp/Posts';
 import SinglePostRedux from 'Comp/SinglePostRedux';
-import Header from 'Comp/Layout/Header';
-import Navigation from 'Comp/Layout/Navigation';
-import Footer from 'Comp/Layout/Footer';
 
-const NotFound = () => (
-    <div>404</div>
-);
+import App from './App';
 
-class App extends React.Component {
-    render () {
-        return (
-            <Router>
-                <Header/>
-                <Navigation/>
-                <Switch>
-                    <Route key="main" exact path="/" render={props=><Posts {...props}/>} />
-                    <Route key="view" exact path="/post/:postId" render={props => <SinglePostRedux {...props}/>} />
-                    <Route key="edit" exact path="/post/:postId/edit" render={props => <SinglePostRedux {...props} edit/>} />
-                    <Route key="create" exact path="/create" render={props => <SinglePostRedux {...props}/>} />
-                    <Route component={NotFound} />
-                </Switch>
-                <Footer/>
-            </Router>
-        );
+const routes = [
+    {
+        id: 'main',
+        name: '메인',
+        path: '/',
+        component: Posts
+    },
+    {
+        id: 'create',
+        name: '쓰기',
+        path: '/create',
+        component: SinglePostRedux
+    },
+    {
+        id: 'view',
+        name: '상세',
+        path: '/post/:postId',
+        component: SinglePostRedux
+    },
+    {
+        id: 'edit',
+        name: '수정',
+        path: '/post/:postId/edit',
+        component: SinglePostRedux
     }
-}
+];
 
 ReactDom.render(
     <Provider store={store}>
