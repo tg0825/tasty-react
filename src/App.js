@@ -8,11 +8,11 @@ import {
 import 'normalize.css';
 import './autoload.scss';
 
-import Posts from 'Comp/Posts';
-import SinglePostRedux from 'Comp/SinglePostRedux';
-import Header from 'Comp/Layout/Header';
-import Navigation from 'Comp/Layout/Navigation';
-import Footer from 'Comp/Layout/Footer';
+import Posts from './Page/Posts';
+import Post from './Page/Post';
+import Header from './Layout/Header';
+import Navigation from './Layout/Navigation';
+import Footer from './Layout/Footer';
 import AuthRouters from './AuthRouters';
 
 const NotFound = () => (
@@ -30,19 +30,19 @@ const routes = [
         id: 'create',
         name: '쓰기',
         path: '/create',
-        component: SinglePostRedux
+        component: Post
     },
     {
         id: 'view',
         name: '상세',
         path: '/post/:postId',
-        component: SinglePostRedux
+        component: Post
     },
     {
         id: 'edit',
         name: '수정',
         path: '/post/:postId/edit',
-        component: SinglePostRedux
+        component: Post
     }
 ];
 

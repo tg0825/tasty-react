@@ -23,7 +23,7 @@ border: 1px solid #eee;
 }
 `;
 
-class SinglePostRedux extends React.Component {
+class Post extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -176,4 +176,4 @@ const mapDispatchToProps = dispatch => ({
   addPost: payload => dispatch(actions.addPost(payload)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePostRedux);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
