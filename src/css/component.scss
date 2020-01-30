@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+  color: $fontColorBase;
+}
+
+a {
+  color: $fontColorBase;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

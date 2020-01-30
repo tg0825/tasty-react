@@ -5,9 +5,6 @@ import {
     Switch
 } from 'react-router-dom';
 
-import 'normalize.css';
-import './autoload.scss';
-
 import Posts from './Page/Posts';
 import Post from './Page/Post';
 import Header from './Layout/Header';

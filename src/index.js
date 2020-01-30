@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+
 import 'normalize.css';
-import './autoload.scss';
+import './css/index.scss';
 
 import {createStore, applyMiddleware} from 'redux';
 import reducers from './reducers';
