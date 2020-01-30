@@ -3,7 +3,9 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = {
+module.exports = (env, options) => {
+    console.log(`This is the Webpack 4 'mode': ${options.mode}`);
+    return {
     entry: './src/index.js',
     output: {
         filename: 'bundle.js',
@@ -13,7 +15,7 @@ module.exports = {
 	devtool: 'eval-source-map', 
     devServer: {
         historyApiFallback: true,
-        publicPath: '/', // here's the change
+        publicPath: '/',
         // contentBase: path.resolve(__dirname + '/build'),
         index: 'index.html',
         port: 9000
@@ -78,4 +80,5 @@ module.exports = {
             'Comp': path.resolve(__dirname, 'src/components/')
         }
     }
+}
 }
