@@ -4,11 +4,11 @@ import {NavLink} from 'react-router-dom';
 const Navigation = () => {
     return (
         <div>
-        	<ul>
+        	{/* <ul>
                 <li>
                     <NavLink activeClassName="active" to='/create'>맛집 추가</NavLink>
                 </li>
-            </ul>
+            </ul> */}
         </div>
      );
 }

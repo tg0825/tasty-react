@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
-import {Link, Redirect} from 'react-router-dom';
 import styled from 'styled-components'
+import {Link, Redirect} from 'react-router-dom';
 
 const TitleInput = styled.input`
 width: 300px;

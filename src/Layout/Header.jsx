@@ -15,13 +15,13 @@ const nav = [
     {
         id: '추가',
         path: '/create',
-        label: '추가'
+        label: '맛집 추가'
     },
 ];
 
 const renderNav = () => {
-    return nav.map(item => 
-        <Link className="header-nav" key={item.id} to={item.path}>{item.label}</Link>
+    return nav.map(item =>
+        <Link className="header--nav" key={item.id} to={item.path}>{item.label}</Link>
         );
 }
 

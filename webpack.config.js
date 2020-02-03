@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = (env, options) => {
     console.log(`This is the Webpack 4 'mode': ${options.mode}`);
     return {
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname + '/build'),
@@ -78,7 +78,11 @@ module.exports = (env, options) => {
     resolve: {
         alias: {
             'Comp': path.resolve(__dirname, 'src/components/')
-        }
+        },
+        extensions: [
+            '.js',
+            '.jsx'
+        ]
     }
 }
 }
