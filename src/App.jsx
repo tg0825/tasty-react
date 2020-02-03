@@ -5,9 +5,10 @@ import {
     Switch
 } from 'react-router-dom';
 
+import Main from './Page/Main.jsx';
 import Posts from './Page/Posts';
 import Post from './Page/Post';
-import Header from './Layout/Header';
+import Header from './Layout/Header.jsx';
 import Navigation from './Layout/Navigation';
 import Footer from './Layout/Footer';
 import AuthRouters from './AuthRouters';
@@ -21,6 +22,12 @@ const routes = [
         id: 'main',
         name: '메인',
         path: '/',
+        component: Main
+    },
+    {
+        id: 'posts',
+        name: '목록',
+        path: '/posts',
         component: Posts
     },
     {

@@ -12,7 +12,7 @@ import ReduxThunk from 'redux-thunk';
 
 const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
-import App from './App';
+import App from './App.jsx';
 
 ReactDom.render(
     <Provider store={store}>
