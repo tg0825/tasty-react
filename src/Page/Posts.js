@@ -1,12 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import {Link} from 'react-router-dom';
 
 class Posts extends React.Component {
     componentDidMount() {
-        this.props.asyncGetPostList();
+        const {asyncGetPostList} = this.props;
+        asyncGetPostList();
     }
     
     showPosts = (list) => (
@@ -25,16 +26,21 @@ class Posts extends React.Component {
     );
             
     render() {
-        const list = this.props.list;
+        const {list} = this.props;
         return (
             <div>
                 <div className="post-list">
                     {list.length === 0 ? null : this.showPosts(list)}
                 </div>
             </div>
-        )
+        );
     }
 }
+
+Posts.propTypes = {
+    asyncGetPostList: PropTypes.func.isRequired,
+    list: PropTypes.any.isRequired
+};
 
 const mapStateToProps = state => ({
   list: state.post.list

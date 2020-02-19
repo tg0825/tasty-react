@@ -57,21 +57,16 @@ class App extends React.Component {
                 <Header/>
                 <Navigation/>
                 <Switch>
-                    {/* <AuthRouters exact path="/" component={Posts}/> */}
                     {
                         routes.map((item) =>{
                             return (
-                                <Route
-                                    exact
-                                    key={item.id}
-                                    path={item.path}
-                                    render={props=>{
-                                        if (item.id === 'edit') {
-                                            props.edit = true;
-                                        }
-                                        return <item.component {...props} />
-                                    }}
-                                />
+                    <AuthRouters 
+                        exact 
+                        key={item.id}
+                        id={item.id}
+                        path="/" 
+                        component={Posts}
+                    />
                             );
                         })
                     }
