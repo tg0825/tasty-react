@@ -1,32 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from '../actions';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class Posts extends React.Component {
     componentDidMount() {
-        const {asyncGetPostList} = this.props;
+        const { asyncGetPostList } = this.props;
         asyncGetPostList();
     }
-    
-    showPosts = (list) => (
+
+    showPosts = list => (
         <div>
-            {
-                list.map(({id, title}, idx) => (
-                    <div key={idx}>
-                        <Link to={`/post/${id}`}> 
-                            {id}:
-                            {title}
-                        </Link>
-                    </div>
-                ))
-            }
+            {list.map(({ id, title }, idx) => (
+                <div key={idx}>
+                    <Link to={`/post/${id}`}>
+                        {id}:{title}
+                    </Link>
+                </div>
+            ))}
         </div>
     );
-            
+
     render() {
-        const {list} = this.props;
+        const { list } = this.props;
         return (
             <div>
                 <div className="post-list">
@@ -39,15 +36,15 @@ class Posts extends React.Component {
 
 Posts.propTypes = {
     asyncGetPostList: PropTypes.func.isRequired,
-    list: PropTypes.any.isRequired
+    list: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = state => ({
-  list: state.post.list
+    list: state.post.list,
 });
 
 const mapDispatchToProps = dispatch => ({
-  asyncGetPostList: () => dispatch(actions.asyncGetPostList()),
+    asyncGetPostList: () => dispatch(actions.asyncGetPostList()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
