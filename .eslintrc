@@ -17,6 +17,10 @@
         }
     },
     "rules": {
-        "semi": "error"
+        "semi": "error",
+        "react/jsx-max-props-per-line": [
+            "error",
+            {"maximum": 1}
+        ]
     }
 }
