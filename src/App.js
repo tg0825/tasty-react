@@ -51,14 +51,14 @@ class App extends React.Component {
                 <Header />
                 <Navigation />
                 <Switch>
-                    {routes.map(item => {
+                    {routes.map(({ id, path, component }) => {
                         return (
                             <AuthRouters
                                 exact
-                                key={item.id}
-                                id={item.id}
-                                path="/"
-                                component={Posts}
+                                key={id}
+                                id={id}
+                                path={path}
+                                component={component}
                             />
                         );
                     })}
