@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Main from './Page/Main.jsx';
+import Main from './Page/Main';
 import Posts from './Page/Posts';
 import Post from './Page/Post';
-import Header from './Layout/Header.jsx';
+import Header from './Layout/Header';
 import Navigation from './Layout/Navigation';
 import Footer from './Layout/Footer';
 import AuthRouters from './AuthRouters';
