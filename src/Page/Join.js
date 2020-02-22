@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+
 const Join = () => {
     const [formData, setFormData] = useState({});
 
@@ -26,56 +28,89 @@ const Join = () => {
     };
 
     return (
-        <form
-            action=""
-            method="post"
-            className="wrap"
-            onSubmit={e => handleSubmit(e)}
-        >
-            <div className="input-text">
-                <div>id</div>
-                <div>
-                    <input
-                        name="id"
-                        type="text"
-                        onChange={e => handleChange(e)}
-                    />
-                </div>
-            </div>
-            <div className="input-text">
-                <div>password</div>
-                <div>
-                    <input
-                        name="pw"
-                        type="password"
-                        onChange={e => handleChange(e)}
-                    />
-                </div>
-            </div>
+        <div>
+            <Formik
+                initialValues={{
+                    id: '',
+                    pw: '',
+                    pwCk: false,
+                    name: '',
+                    terms: false,
+                }}
+                validate={values => {
+                    const errors = {};
 
-            <div>
-                <div>password</div>
-                <div>
-                    <input
-                        name="pw2"
-                        type="password"
-                        onChange={e => handleChange(e)}
-                    />
-                </div>
-            </div>
+                    if (!values.email) {
+                        errors.email = 'Required';
+                    }
 
-            <div className="input-text">
-                <div>name</div>
-                <div>
-                    <input
-                        name="name"
-                        type="text"
-                        onChange={e => handleChange(e)}
-                    />
-                </div>
-            </div>
-            <button type="submit">전송</button>
-        </form>
+                    return errors;
+                }}
+                onSubmit={({ values, setSubmitting }) => {
+                    setTimeout(() => {
+                        console.log(JSON.stringify(values, null, 2));
+                        setSubmitting(false);
+                    }, 400);
+                }}
+            >
+                {({ isSubmitting }) => (
+                    <Form>
+                        <div className="input-text">
+                            <div>id</div>
+                            <div>
+                                <Field type="text" name="id" />
+                            </div>
+                        </div>
+                        <ErrorMessage name="id" component="div" />
+                        {errors.id}
+                        <div className="input-text">
+                            <div>password</div>
+                            <div>
+                                <input
+                                    name="pw"
+                                    type="password"
+                                    onChange={e => handleChange(e)}
+                                />
+                            </div>
+                        </div>
+                        {errors.pw}
+
+                        <div>
+                            <div>password</div>
+                            <div>
+                                <input
+                                    name="pwCk"
+                                    type="password"
+                                    onChange={e => handleChange(e)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="input-text">
+                            <div>name</div>
+                            <div>
+                                <input
+                                    name="name"
+                                    type="text"
+                                    onChange={e => handleChange(e)}
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label>
+                                <input name="terms" type="checkbox" />
+                                동의합니까?
+                            </label>
+                        </div>
+
+                        <button type="submit" disabled={isSubmitting}>
+                            전송
+                        </button>
+                    </Form>
+                )}
+            </Formik>
+        </div>
     );
 };
 
