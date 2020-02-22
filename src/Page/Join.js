@@ -1,52 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+// import * as Yup from 'yup';
+import Yup from '../localization';
 
 const Join = () => {
-    const [formData, setFormData] = useState({});
-
-    /**
-     * input change handler
-     */
-    const handleChange = e => {
-        const { name, value } = e.currentTarget;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-
-        console.log(formData);
-    };
-
-    /**
-     * 전송
-     */
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(e);
+    const formData = {
+        id: '',
+        pw: '',
+        pwCk: '',
+        name: '',
+        terms: false,
     };
 
     return (
         <div>
             <Formik
                 initialValues={{
-                    id: '',
-                    pw: '',
-                    pwCk: false,
-                    name: '',
-                    terms: false,
+                    ...formData,
                 }}
-                validate={values => {
-                    const errors = {};
-
-                    if (!values.email) {
-                        errors.email = 'Required';
-                    }
-
-                    return errors;
-                }}
-                onSubmit={({ values, setSubmitting }) => {
+                validationSchema={Yup.object({
+                    id: Yup.string()
+                        .min(3)
+                        .max(15)
+                        .required(),
+                    pw: Yup.string().required(),
+                    pwCk: Yup.string()
+                        .oneOf([Yup.ref('pw'), null], '비밀번호 확인해주세요.')
+                        .required(),
+                    name: Yup.string().required(),
+                    terms: Yup.bool().oneOf([true], '채크해주세요.'),
+                })}
+                onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         console.log(JSON.stringify(values, null, 2));
                         setSubmitting(false);
@@ -54,55 +40,47 @@ const Join = () => {
                 }}
             >
                 {({ isSubmitting }) => (
-                    <Form>
+                    <Form autoComplete="off">
                         <div className="input-text">
-                            <div>id</div>
+                            <div>아이디</div>
                             <div>
                                 <Field type="text" name="id" />
                             </div>
                         </div>
                         <ErrorMessage name="id" component="div" />
-                        {errors.id}
-                        <div className="input-text">
-                            <div>password</div>
-                            <div>
-                                <input
-                                    name="pw"
-                                    type="password"
-                                    onChange={e => handleChange(e)}
-                                />
-                            </div>
-                        </div>
-                        {errors.pw}
-
-                        <div>
-                            <div>password</div>
-                            <div>
-                                <input
-                                    name="pwCk"
-                                    type="password"
-                                    onChange={e => handleChange(e)}
-                                />
-                            </div>
-                        </div>
 
                         <div className="input-text">
-                            <div>name</div>
+                            <div>비밀번호</div>
                             <div>
-                                <input
-                                    name="name"
-                                    type="text"
-                                    onChange={e => handleChange(e)}
-                                />
+                                <Field type="password" name="pw" />
                             </div>
                         </div>
+                        <ErrorMessage name="pw" component="div" />
 
-                        <div>
-                            <label>
-                                <input name="terms" type="checkbox" />
+                        <div className="input-text">
+                            <div>비밀번호 확인</div>
+                            <div>
+                                <Field type="text" name="pwCk" />
+                            </div>
+                        </div>
+                        <ErrorMessage name="pwCk" component="div" />
+
+                        <div className="input-text">
+                            <div>닉네임</div>
+                            <div>
+                                <Field type="text" name="name" />
+                            </div>
+                        </div>
+                        <ErrorMessage name="name" component="div" />
+
+                        <div className="input-text">
+                            <div>약관</div>
+                            <div>
+                                <Field name="terms" type="checkbox" />
                                 동의합니까?
-                            </label>
+                            </div>
                         </div>
+                        <ErrorMessage name="terms" component="div" />
 
                         <button type="submit" disabled={isSubmitting}>
                             전송
