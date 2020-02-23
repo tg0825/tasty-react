@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as shopActions from '../modules/shop';
@@ -6,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 class Posts extends React.Component {
     componentDidMount() {
-        const { asyncGetPostList } = this.props;
-        asyncGetPostList();
+        const { asyncGetShops } = this.props;
+        asyncGetShops();
     }
 
     showPosts = list => (
@@ -35,7 +36,7 @@ class Posts extends React.Component {
 }
 
 Posts.propTypes = {
-    asyncGetPostList: PropTypes.func.isRequired,
+    asyncGetShops: PropTypes.func.isRequired,
     list: PropTypes.any.isRequired,
 };
 
@@ -43,8 +44,12 @@ const mapStateToProps = state => ({
     list: state.shop.items,
 });
 
-const mapDispatchToProps = dispatch => ({
-    asyncGetPostList: () => dispatch(shopActions.asyncGetShops()),
-});
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            asyncGetShops: shopActions.asyncGetShops,
+        },
+        dispatch,
+    );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
