@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as shopActions from '../modules/shop';
 import { Link } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
+
 class Posts extends React.Component {
     componentDidMount() {
         const { asyncGetShops } = this.props;
@@ -25,8 +27,23 @@ class Posts extends React.Component {
 
     render() {
         const { list } = this.props;
+
+        const helmet = () => {
+            console.log(this.props);
+
+            return (
+                <Helmet>
+                    <title>목록</title>
+                    <meta name="description" content="목록" />
+                </Helmet>
+            );
+        };
+
+        if (!list.length) return null;
+
         return (
             <div>
+                {helmet()}
                 <div className="post-list">
                     {list.length === 0 ? null : this.showPosts(list)}
                 </div>

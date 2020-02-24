@@ -5,6 +5,8 @@ import * as actions from '../actions';
 import styled from 'styled-components';
 import { Link, Redirect } from 'react-router-dom';
 
+import { Helmet } from 'react-helmet';
+
 const TitleInput = styled.input`
     width: 300px;
     padding: 4px;
@@ -112,6 +114,10 @@ class Post extends React.Component {
 
         return (
             <div>
+                <Helmet>
+                    <title>{title}</title>
+                    <meta name="description" content={body.slice(0, 200)} />
+                </Helmet>
                 <form
                     onSubmit={e => {
                         e.preventDefault;

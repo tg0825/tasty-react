@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './Layout/Header';
@@ -14,6 +15,10 @@ class App extends React.Component {
     render() {
         return (
             <Router>
+                <Helmet>
+                    <title>맛집</title>
+                    <meta name="description" content="사내맛집" />
+                </Helmet>
                 <Header />
                 <Navigation />
                 <Switch>
