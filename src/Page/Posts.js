@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as shopActions from '../modules/shop';
@@ -61,12 +60,8 @@ const mapStateToProps = state => ({
     list: state.shop.items,
 });
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            asyncGetShops: shopActions.asyncGetShops,
-        },
-        dispatch,
-    );
+const mapDispatchToProps = {
+    asyncGetShops: shopActions.asyncGetShops,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

@@ -2,7 +2,10 @@ import axios from 'axios';
 
 // shop
 const GET_SHOPS = 'GET_SHOPS';
+const GET_SHOP = 'GET_SHOP';
 const POST_SHOP = 'POST_SHOP';
+const PATCH_SHOP = 'PATCH_SHOP';
+// const DELETE_SHOP = 'DELETE_SHOP';
 
 const initialState = {
     items: [],
@@ -14,18 +17,52 @@ export const getShops = payload => ({
     payload,
 });
 
+export const getShop = payload => ({
+    type: GET_SHOP,
+    payload,
+});
+
 export const postShop = () => ({
     type: POST_SHOP,
 });
 
-export const asyncGetShops = () => dispatch => {
-    return axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
-        dispatch(getShops(res.data));
-        return res.data;
+export const patchShop = payload => dispatch =>
+    axios
+        .patch(
+            `https://jsonplaceholder.typicode.com/posts/${payload.id}`,
+            JSON.stringify(payload),
+            {
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            },
+        )
+        .then(res => {
+            console.log(res);
+
+            dispatch({
+                type: PATCH_SHOP,
+                payload,
+            });
+        });
+
+export const deleteShop = id => () =>
+    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`).then(res => {
+        console.log(res);
+        alert('done');
     });
+
+export const asyncGetShops = (payload = {}) => dispatch => {
+    const { id } = payload;
+    return axios
+        .get(`https://jsonplaceholder.typicode.com/posts${id ? '/' + id : ''}`)
+        .then(res => {
+            dispatch(getShops(res.data));
+            return res.data;
+        });
 };
 
-export const asyncPostShops = () => dispatch => {
+export const asyncPostShop = () => dispatch => {
     setTimeout(() => {
         dispatch(postShop());
     }, 1000);
