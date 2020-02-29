@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as shopActions from 'Modules/shop';
 import { Link } from 'react-router-dom';
-
 import { Helmet } from 'react-helmet';
+
+import * as shopActions from 'Modules/shop';
 
 class Posts extends React.Component {
     componentDidMount() {
