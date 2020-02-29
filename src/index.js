@@ -5,14 +5,14 @@ import 'normalize.css';
 import './css/index.scss';
 
 import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
+import modules from './modules';
 
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 
-const store = createStore(reducers, applyMiddleware(ReduxThunk));
+const store = createStore(modules, applyMiddleware(ReduxThunk));
 
-import App from './App.js';
+import App from './app.js';
 
 ReactDom.render(
     <Provider store={store}>

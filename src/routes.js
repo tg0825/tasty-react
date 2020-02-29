@@ -1,7 +1,8 @@
-import Main from './Page/Main';
-import Posts from './Page/Posts';
-import Post from './Page/Post';
-import Join from './Page/Join';
+import Main from './page/main';
+import Join from './page/join';
+
+import ShopList from './page/shop/list';
+import ShopDetail from './page/shop/detail';
 
 const routes = [
     {
@@ -11,34 +12,34 @@ const routes = [
         component: Main,
     },
     {
-        id: 'posts',
-        name: '목록',
-        path: '/posts',
-        component: Posts,
-    },
-    {
-        id: 'create',
-        name: '쓰기',
-        path: '/create',
-        component: Post,
-    },
-    {
-        id: 'view',
-        name: '상세',
-        path: '/post/:postId',
-        component: Post,
-    },
-    {
-        id: 'edit',
-        name: '수정',
-        path: '/post/:postId/edit',
-        component: Post,
-    },
-    {
         id: 'join',
         name: '회원가입',
         path: '/join',
         component: Join,
+    },
+    {
+        id: 'shopList',
+        name: '목록',
+        path: '/shop/list',
+        component: ShopList,
+    },
+    {
+        id: 'add',
+        name: '등록',
+        path: '/shop/add',
+        component: ShopDetail,
+    },
+    {
+        id: 'detail',
+        name: '상세',
+        path: '/shop/:postId',
+        component: ShopDetail,
+    },
+    {
+        id: 'edit',
+        name: '수정',
+        path: '/shop/:postId/detail',
+        component: ShopDetail,
     },
 ];
 
