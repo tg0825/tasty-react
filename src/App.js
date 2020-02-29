@@ -2,10 +2,10 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Header from './Layout/Header';
-import Navigation from './Layout/Navigation';
-import Footer from './Layout/Footer';
-import AuthRouters from './AuthRouters';
+import Header from './layout/header';
+import Navigation from './layout/navigation';
+import Footer from './layout/footer';
+import AuthRouters from './auth-routers';
 
 import routes from './routes';
 
