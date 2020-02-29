@@ -16,7 +16,7 @@ class Posts extends React.Component {
         <div>
             {list.map(({ id, title }, idx) => (
                 <div key={idx}>
-                    <Link to={`/post/${id}`}>
+                    <Link to={`/shop/${id}`}>
                         {id}:{title}
                     </Link>
                 </div>
@@ -28,8 +28,6 @@ class Posts extends React.Component {
         const { list } = this.props;
 
         const helmet = () => {
-            console.log(this.props);
-
             return (
                 <Helmet>
                     <title>목록</title>

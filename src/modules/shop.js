@@ -53,9 +53,22 @@ export const deleteShop = id => () =>
     });
 
 export const asyncGetShops = (payload = {}) => dispatch => {
-    const { id } = payload;
+    const params = Object.assign(
+        {
+            _page: 1,
+        },
+        payload,
+    );
+
     return axios
-        .get(`https://jsonplaceholder.typicode.com/posts${id ? '/' + id : ''}`)
+        .get(
+            `https://jsonplaceholder.typicode.com/posts${
+                params.id ? '/' + params.id : ''
+            }`,
+            {
+                params: params,
+            },
+        )
         .then(res => {
             dispatch(getShops(res.data));
             return res.data;
