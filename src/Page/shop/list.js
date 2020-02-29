@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import * as shopActions from 'Modules/shop';
+import Pagination from 'Comp/pagination';
 
 class Posts extends React.Component {
     componentDidMount() {
@@ -25,7 +26,8 @@ class Posts extends React.Component {
     );
 
     render() {
-        const { list } = this.props;
+        const { items, asyncGetShops } = this.props;
+        const { data = [] } = items;
 
         const helmet = () => {
             return (
@@ -36,14 +38,20 @@ class Posts extends React.Component {
             );
         };
 
-        if (!list.length) return null;
+        if (!data.length) return null;
 
         return (
             <div>
                 {helmet()}
                 <div className="post-list">
-                    {list.length === 0 ? null : this.showPosts(list)}
+                    {data.length === 0 ? null : this.showPosts(data)}
                 </div>
+                <Pagination
+                    paginationData={items}
+                    onClickPageBtn={pageData => {
+                        asyncGetShops(Object.assign({}, pageData));
+                    }}
+                />
             </div>
         );
     }
@@ -51,11 +59,11 @@ class Posts extends React.Component {
 
 Posts.propTypes = {
     asyncGetShops: PropTypes.func.isRequired,
-    list: PropTypes.any.isRequired,
+    items: PropTypes.any.isRequired,
 };
 
 const mapStateToProps = state => ({
-    list: state.shop.items,
+    items: state.shop.items,
 });
 
 const mapDispatchToProps = {

@@ -8,7 +8,7 @@ const PATCH_SHOP = 'PATCH_SHOP';
 // const DELETE_SHOP = 'DELETE_SHOP';
 
 const initialState = {
-    items: [],
+    items: {},
     selectedItem: {},
 };
 
@@ -53,6 +53,8 @@ export const deleteShop = id => () =>
     });
 
 export const asyncGetShops = (payload = {}) => dispatch => {
+    console.log(payload);
+
     const params = Object.assign(
         {
             _page: 1,
@@ -70,8 +72,8 @@ export const asyncGetShops = (payload = {}) => dispatch => {
             },
         )
         .then(res => {
-            dispatch(getShops(res.data));
-            return res.data;
+            dispatch(getShops(res));
+            return res;
         });
 };
 
