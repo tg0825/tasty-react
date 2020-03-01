@@ -89,7 +89,7 @@ class Post extends React.Component {
     showPost = () => {
         const { id } = this;
         const { isEdit = false, title, body } = this.state;
-        const { patchShop } = this.props;
+        // const { patchShop } = this.props;
         const isRead = !id || isEdit ? false : true;
 
         const displayBtns = () => {
