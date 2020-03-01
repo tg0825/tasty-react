@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// shop
+// SHOP
 const GET_SHOPS = 'GET_SHOPS';
 const GET_SHOP = 'GET_SHOP';
 const POST_SHOP = 'POST_SHOP';
@@ -83,7 +83,7 @@ export const asyncPostShop = () => dispatch => {
     }, 1000);
 };
 
-// reducer
+// REDUCER
 const shop = (state = initialState, action) => {
     switch (action.type) {
         case GET_SHOPS:
