@@ -1,29 +1,24 @@
 import axios from 'axios';
 
-// SHOP
-const GET_SHOPS = 'GET_SHOPS';
-const GET_SHOP = 'GET_SHOP';
-const POST_SHOP = 'POST_SHOP';
-const PATCH_SHOP = 'PATCH_SHOP';
-// const DELETE_SHOP = 'DELETE_SHOP';
-
 const initialState = {
     items: {},
     selectedItem: {},
 };
 
-export const getShops = payload => ({
-    type: GET_SHOPS,
-    payload,
-});
+// Actions
+const GET = '/shops/GET';
+const POST = '/shops/POST';
+const PATCH = '/shops/PATCH';
+// const DELETE_SHOP = 'DELETE_SHOP';
 
-export const getShop = payload => ({
-    type: GET_SHOP,
+// Actions Creator
+export const getShops = payload => ({
+    type: GET,
     payload,
 });
 
 export const postShop = () => ({
-    type: POST_SHOP,
+    type: POST,
 });
 
 export const patchShop = payload => dispatch =>
@@ -41,7 +36,7 @@ export const patchShop = payload => dispatch =>
             console.log(res);
 
             dispatch({
-                type: PATCH_SHOP,
+                type: PATCH,
                 payload,
             });
         });
@@ -53,8 +48,6 @@ export const deleteShop = id => () =>
     });
 
 export const asyncGetShops = (payload = {}) => dispatch => {
-    console.log(payload);
-
     const params = Object.assign(
         {
             _page: 1,
@@ -83,10 +76,10 @@ export const asyncPostShop = () => dispatch => {
     }, 1000);
 };
 
-// REDUCER
+// Reducer
 const shop = (state = initialState, action) => {
     switch (action.type) {
-        case GET_SHOPS:
+        case GET:
             return {
                 ...state,
                 items: action.payload,
