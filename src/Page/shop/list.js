@@ -10,12 +10,12 @@ import Pagination from 'Comp/pagination';
 class Posts extends React.Component {
     constructor(props) {
         super(props);
-        this.page = null;
+        this.page = 1;
     }
 
     componentDidMount() {
         const { asyncGetShops } = this.props;
-        this.page = 1;
+
         asyncGetShops();
     }
 
