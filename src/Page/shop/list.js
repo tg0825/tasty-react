@@ -8,12 +8,18 @@ import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
 
 class Posts extends React.Component {
+    constructor(props) {
+        super(props);
+        this.page = null;
+    }
+
     componentDidMount() {
         const { asyncGetShops } = this.props;
+        this.page = 1;
         asyncGetShops();
     }
 
-    showPosts = list => (
+    renderList = list => (
         <div>
             {list.map(({ id, title }, idx) => (
                 <div key={idx}>
@@ -32,7 +38,7 @@ class Posts extends React.Component {
         const helmet = () => {
             return (
                 <Helmet>
-                    <title>목록</title>
+                    <title>{`${this.page.toString()} 페이지`}</title>
                     <meta name="description" content="목록" />
                 </Helmet>
             );
@@ -44,11 +50,12 @@ class Posts extends React.Component {
             <div>
                 {helmet()}
                 <div className="post-list">
-                    {data.length === 0 ? null : this.showPosts(data)}
+                    {data.length === 0 ? null : this.renderList(data)}
                 </div>
                 <Pagination
                     paginationData={items}
                     onClickPageBtn={pageData => {
+                        this.page = pageData._page;
                         asyncGetShops(Object.assign({}, pageData));
                     }}
                 />

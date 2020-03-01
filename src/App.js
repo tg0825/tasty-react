@@ -15,8 +15,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Helmet>
-                    <title>맛집</title>
+                <Helmet titleTemplate="%s | 맛집" defaultTitle="맛집">
                     <meta name="description" content="사내맛집" />
                 </Helmet>
                 <Header />
