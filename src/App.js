@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from './layout/header';
 import Navigation from './layout/navigation';
@@ -14,7 +14,7 @@ const NotFound = () => <div>404</div>;
 class App extends React.Component {
     render() {
         return (
-            <Router>
+            <div>
                 <Helmet>
                     <title>맛집</title>
                     <meta name="description" content="사내맛집" />
@@ -36,7 +36,7 @@ class App extends React.Component {
                     <Route component={NotFound} />
                 </Switch>
                 <Footer />
-            </Router>
+            </div>
         );
     }
 }

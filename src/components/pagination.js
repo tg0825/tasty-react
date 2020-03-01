@@ -55,7 +55,6 @@ import styled from 'styled-components';
 // };
 
 const PageBtn = styled.button`
-    color: ${props => props.theme.grayScale02};
     box-sizing: border-box;
     display: inline-block;
     min-width: 32px;
@@ -64,8 +63,8 @@ const PageBtn = styled.button`
 
     &.active {
         padding: 1px;
-        border: 1px solid ${props => props.theme.pointColor01};
-        color: ${props => props.theme.pointColor01};
+        border: 1px solid ${props => props.theme.mainColor};
+        color: ${props => props.theme.mainColor};
     }
 `;
 

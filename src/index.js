@@ -13,10 +13,17 @@ import ReduxThunk from 'redux-thunk';
 const store = createStore(modules, applyMiddleware(ReduxThunk));
 
 import App from './app.js';
+import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
+import theme from 'Src/css/theme.js';
 
 ReactDom.render(
     <Provider store={store}>
-        <App />
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <App />
+            </ThemeProvider>
+        </BrowserRouter>
     </Provider>,
     document.getElementById('root'),
 );
