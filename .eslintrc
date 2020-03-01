@@ -19,5 +19,10 @@
     },
     "rules": {
         "semi": "error"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
