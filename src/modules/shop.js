@@ -1,3 +1,4 @@
+// 음식점 모듈
 import axios from 'axios';
 
 const initialState = {
