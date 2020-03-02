@@ -2,14 +2,10 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        // .prettierrc 적용
         "plugin:prettier/recommended"
     ],
     "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module",
@@ -18,7 +14,14 @@
         }
     },
     "rules": {
-        "semi": "error"
+        "prettier/prettier": [
+            "error"
+        ]
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
     },
     "settings": {
         "react": {

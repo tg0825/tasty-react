@@ -1,17 +1,24 @@
 import React from 'react';
-import { getRouteById } from 'Src/routes';
 import { Link } from 'react-router-dom';
 
-const subNavIdList = ['mypage'];
+import { getRouteById } from 'Src/routes';
+
+import Header from 'Ui/header';
+const { SubNav } = Header;
+const subNavIdList = ['join', 'mypage'];
 
 const HeaderSubNav = () => {
-    return getRouteById(subNavIdList).map(nav => {
-        return (
-            <Link key={nav.id} to={nav.path}>
-                {nav.name}
-            </Link>
-        );
-    });
+    return (
+        <SubNav>
+            {getRouteById(subNavIdList).map(nav => {
+                return (
+                    <SubNav.Link as={Link} key={nav.id} to={nav.path}>
+                        {nav.name}
+                    </SubNav.Link>
+                );
+            })}
+        </SubNav>
+    );
 };
 
 export default HeaderSubNav;

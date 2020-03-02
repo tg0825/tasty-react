@@ -3,16 +3,22 @@ import { Link } from 'react-router-dom';
 
 import { getRouteById } from 'Src/routes';
 
-const gnbIdList = ['shopList', 'add', 'join'];
+import Header from 'Ui/header';
+const { MainNav } = Header;
+const gnbIdList = ['shopList', 'add'];
 
 const HeaderMainNav = () => {
-    return getRouteById(gnbIdList).map(nav => {
-        return (
-            <Link className="header--nav" key={nav.id} to={nav.path}>
-                {nav.name}
-            </Link>
-        );
-    });
+    return (
+        <MainNav>
+            {getRouteById(gnbIdList).map(nav => {
+                return (
+                    <MainNav.Link as={Link} key={nav.id} to={nav.path}>
+                        {nav.name}
+                    </MainNav.Link>
+                );
+            })}
+        </MainNav>
+    );
 };
 
 export default HeaderMainNav;
