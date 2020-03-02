@@ -1,5 +1,6 @@
 import Main from './page/main';
 import Join from './page/join';
+import MyPage from './page/mypage';
 
 import ShopList from './page/shop/list';
 import ShopDetail from './page/shop/detail';
@@ -10,6 +11,12 @@ const routes = [
         name: '메인',
         path: '/',
         component: Main,
+    },
+    {
+        id: 'mypage',
+        name: '내정보',
+        path: '/mypage',
+        component: MyPage,
     },
     {
         id: 'join',
@@ -42,5 +49,8 @@ const routes = [
         component: ShopDetail,
     },
 ];
+
+export const getRouteById = list =>
+    list.map(value => routes.filter(({ id }) => id === value)[0]);
 
 export default routes;
