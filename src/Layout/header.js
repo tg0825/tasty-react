@@ -1,29 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import routes from 'Src/routes';
+import HeaderMainNav from './header-main-nav';
+import HeaderSubNav from './header-sub-nav';
 
-const gnbList = ['shopList', 'add', 'join'];
-
-const renderNav = () => {
-    return gnbList.map(value => {
-        const item = routes.filter(({ id }) => id === value)[0];
-
-        return (
-            <Link className="header--nav" key={item.id} to={item.path}>
-                {item.name}
-            </Link>
-        );
-    });
-};
-
-const header = () => {
+const Header = () => {
     return (
-        <div className="header">
+        <header className="header">
             <Link to="/">사내맛집</Link>
-            {renderNav()}
-        </div>
+            <HeaderMainNav />
+            <HeaderSubNav />
+        </header>
     );
 };
 
-export default header;
+export default Header;
