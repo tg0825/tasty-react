@@ -28,6 +28,11 @@ const MyPage = () => {
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
                         <div className="input-text">
+                            <div>
+                                <img src="/images/image.jpg" alt="" />
+                            </div>
+                        </div>
+                        <div className="input-text">
                             <div>닉네임</div>
                             <div>
                                 <Field type="text" name="name" />

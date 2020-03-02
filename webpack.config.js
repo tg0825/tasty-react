@@ -7,18 +7,19 @@ module.exports = (env, options) => {
     console.log(`This is the Webpack 4 'mode': ${options.mode}`);
     return {
         entry: './src/index',
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname + '/build'),
-            publicPath: '/',
-        },
         devtool: 'eval-source-map',
         devServer: {
+            hot: true,
             historyApiFallback: true,
-            publicPath: '/',
-            // contentBase: path.resolve(__dirname + '/build'),
-            index: 'index.html',
             port: 9000,
+            index: 'index.html',
+            publicPath: '/',
+            contentBase: path.join(__dirname, '/public'),
+        },
+        output: {
+            filename: 'bundle.js',
+            path: path.resolve(`${__dirname}/build/`),
+            publicPath: '/',
         },
         mode: 'none',
         module: {
