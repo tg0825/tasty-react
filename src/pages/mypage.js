@@ -7,14 +7,16 @@ import Yup from '../localization';
 import Foo from 'Src/views/foo';
 import withDialog from 'Src/modals/withDialog';
 
-const Modal = withDialog()(Foo);
+const Modal = withDialog(Foo);
 
 const MyPage = () => {
     const formData = {
-        name: '',
+        name: 'username',
     };
 
-    // console.log(Modal);
+    const modalData = {
+        title: 'modal title',
+    };
 
     return (
         <div>
@@ -53,7 +55,12 @@ const MyPage = () => {
                     </Form>
                 )}
             </Formik>
-            <Modal title="foofoo" />
+            <Modal
+                modalData={modalData}
+                componentData={{
+                    name: formData.name,
+                }}
+            />
         </div>
     );
 };

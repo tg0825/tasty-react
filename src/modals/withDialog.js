@@ -1,14 +1,16 @@
 import React from 'react';
 
-const withDialog = () => WrappedComponent => props => {
+const withDialog = WrappedComponent => props => {
+    const { modalData, componentData } = props;
+    const { title } = modalData;
     return (
         <div>
             <div>
-                <div>dialog</div>
+                <div>{title}</div>
                 <div>close btn</div>
             </div>
             <div>
-                <WrappedComponent {...props} />
+                <WrappedComponent {...componentData} />
             </div>
         </div>
     );

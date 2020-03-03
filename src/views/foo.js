@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Foo = props => {
-    return <div>{props.title}</div>;
+    return <div>{props.name}</div>;
 };
 
 export default Foo;
