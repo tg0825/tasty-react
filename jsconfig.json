@@ -9,6 +9,9 @@
             "Ui/*": [
                 "src/ui/*"
             ],
+            "Pages/*": [
+                "src/pages/*"
+            ],
             "Comp/*": [
                 "src/components/*"
             ],
