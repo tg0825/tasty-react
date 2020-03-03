@@ -1,9 +1,9 @@
-import Main from './page/main';
-import Join from './page/join';
-import MyPage from './page/mypage';
+import Main from './pages/Main';
+import Join from './pages/join';
+import MyPage from './pages/mypage';
 
-import ShopList from './page/shop/list';
-import ShopDetail from './page/shop/detail';
+import ShopList from './pages/shop/list';
+import ShopDetail from './pages/shop/detail';
 
 const routes = [
     {

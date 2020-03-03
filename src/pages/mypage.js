@@ -4,10 +4,17 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
+import Foo from 'Src/views/foo';
+import withDialog from 'Src/modals/withDialog';
+
+const Modal = withDialog()(Foo);
+
 const MyPage = () => {
     const formData = {
         name: '',
     };
+
+    // console.log(Modal);
 
     return (
         <div>
@@ -46,6 +53,7 @@ const MyPage = () => {
                     </Form>
                 )}
             </Formik>
+            <Modal title="foofoo" />
         </div>
     );
 };
