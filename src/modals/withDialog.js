@@ -1,18 +1,22 @@
 import React from 'react';
+import Dialog from 'Ui/dialog';
 
 const withDialog = WrappedComponent => props => {
-    const { modalData, componentData } = props;
+    const { isShow, modalData, componentData } = props;
     const { title } = modalData;
+
+    if (!isShow) return null;
+
     return (
-        <div>
-            <div>
+        <Dialog>
+            <Dialog.Header>
                 <div>{title}</div>
-                <div>close btn</div>
-            </div>
-            <div>
+                <Dialog.P_Option>close btn</Dialog.P_Option>
+            </Dialog.Header>
+            <Dialog.Body>
                 <WrappedComponent {...componentData} />
-            </div>
-        </div>
+            </Dialog.Body>
+        </Dialog>
     );
 };
 

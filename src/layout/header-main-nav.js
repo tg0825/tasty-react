@@ -5,7 +5,7 @@ import { getRouteById } from 'Src/routes';
 
 import Header from 'Ui/header';
 const { MainNav } = Header;
-const gnbIdList = ['shopList', 'add'];
+const gnbIdList = ['shopList', 'add', 'modalexample'];
 
 const HeaderMainNav = () => {
     return (
