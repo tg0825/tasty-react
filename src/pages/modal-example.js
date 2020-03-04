@@ -26,7 +26,7 @@ const MyPage = () => {
      * 모달 토글 버튼 클릭 핸들러
      */
     const handleClickModalToggle = () => {
-        setIsShow(!isShow);
+        setIsShow(true);
     };
 
     return (
@@ -35,6 +35,9 @@ const MyPage = () => {
 
             <Modal
                 isShow={isShow}
+                handleClickClose={() => {
+                    setIsShow(false);
+                }}
                 modalData={modalData}
                 componentData={{
                     name: formData.name,
