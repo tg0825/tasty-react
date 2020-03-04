@@ -1,9 +1,12 @@
-import Main from './page/main';
-import Join from './page/join';
-import MyPage from './page/mypage';
+import Main from 'Pages/Main';
+import Join from 'Pages/join';
+import MyPage from 'Pages/mypage';
 
-import ShopList from './page/shop/list';
-import ShopDetail from './page/shop/detail';
+import ShopList from 'Pages/shop/list';
+import ShopDetail from 'Pages/shop/detail';
+
+// etc..
+import ModalExample from 'Pages/modal-example';
 
 const routes = [
     {
@@ -47,6 +50,12 @@ const routes = [
         name: '수정',
         path: '/shop/:postId/detail',
         component: ShopDetail,
+    },
+    {
+        id: 'modalexample',
+        name: '모달예제',
+        path: '/modalexample',
+        component: ModalExample,
     },
 ];
 

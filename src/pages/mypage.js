@@ -6,7 +6,7 @@ import Yup from '../localization';
 
 const MyPage = () => {
     const formData = {
-        name: '',
+        name: 'username',
     };
 
     return (
@@ -27,6 +27,11 @@ const MyPage = () => {
             >
                 {({ isSubmitting }) => (
                     <Form autoComplete="off">
+                        <div className="input-text">
+                            <div>
+                                <img src="/images/image.jpg" alt="" />
+                            </div>
+                        </div>
                         <div className="input-text">
                             <div>닉네임</div>
                             <div>
