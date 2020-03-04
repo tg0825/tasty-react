@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Dialog from 'Ui/dialog';
 
 const withDialog = WrappedComponent => props => {
+    const node = useRef();
     const { isShow, handleClickClose, modalData, componentData } = props;
     const { title } = modalData;
 
-    const modalClose = () => {
+    const modalClose = e => {
+        // 모달의 자식이면 return
+        if (e && node.current.contains(e.target)) {
+            return;
+        }
+
         document.removeEventListener('click', modalOutsideClick);
         handleClickClose();
     };
 
-    const modalOutsideClick = () => {
-        modalClose();
+    const modalOutsideClick = e => {
+        modalClose(e);
     };
 
     useEffect(() => {
@@ -24,7 +30,7 @@ const withDialog = WrappedComponent => props => {
 
     return (
         isShow && (
-            <Dialog>
+            <Dialog ref={node}>
                 <Dialog.Header>
                     <div>{title}</div>
                     <Dialog.P_Option
