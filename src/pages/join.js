@@ -1,16 +1,40 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
+class ParseValue {
+    constructor(values) {
+        this.id = values.id;
+        this.pw = values.pw;
+        this.name = values.name;
+    }
+}
+
+const joinLogic = values => {
+    console.log(values);
+    const user = new ParseValue(values);
+    const users = JSON.parse(localStorage.getItem('users_temp')) || [];
+
+    localStorage.setItem('users_temp', JSON.stringify([...users, user]));
+    localStorage.setItem('user', JSON.stringify(user));
+
+    // 값 채크
+    // 완료시 로컬스토리지에 아이디 저장
+    // 로그인 여부 및 데이터 저장
+    // 메인 페이지로 이동
+    return true;
+};
+
 const Join = () => {
     const formData = {
-        id: '',
-        pw: '',
-        pwCk: '',
-        name: '',
-        terms: false,
+        id: 'foo',
+        pw: '123',
+        pwCk: '123',
+        name: 'myFoo',
+        terms: true,
     };
 
     return (
@@ -33,9 +57,14 @@ const Join = () => {
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                        console.log(JSON.stringify(values, null, 2));
+                        const result = joinLogic(values);
+                        if (result) return <Redirect to="/" />;
                         setSubmitting(false);
-                    }, 400);
+                    }, 500);
+                    // setTimeout(() => {
+                    //     console.log(JSON.stringify(values, null, 2));
+                    //     setSubmitting(false);
+                    // }, 400);
                 }}
             >
                 {({ isSubmitting }) => (
