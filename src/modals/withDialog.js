@@ -16,19 +16,11 @@ const withDialog = WrappedComponent => props => {
 
     useEffect(() => {
         if (isShow) {
-            console.log('on');
             document.addEventListener('click', modalOutsideClick);
         } else {
-            console.log('off');
             document.removeEventListener('click', modalOutsideClick);
         }
     }, [isShow]);
-
-    // useEffect(() => {
-    //     console.log('mount');
-    // }, []);
-
-    // console.log('run');
 
     return (
         isShow && (
