@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import Dialog from 'Ui/dialog';
 
 const withDialog = WrappedComponent => props => {
@@ -6,25 +6,26 @@ const withDialog = WrappedComponent => props => {
     const { isShow, handleClickClose, modalData, componentData } = props;
     const { title } = modalData;
 
-    const modalClose = e => {
-        // 모달의 자식이면 return
-        if (e && node.current.contains(e.target)) {
-            return;
-        }
+    // 자식 요소가 업데이트 될 때 함수가 한번만 실행되도록 한다.
+    // useCallback이 없으면 자식 요소가 랜더링 될 때 추가적으로 이벤트가 생성 + 추가 된다.
+    const modalClose = useCallback(
+        e => {
+            // 모달의 자식이면 return
+            if (e && node.current.contains(e.target)) {
+                return;
+            }
 
-        document.removeEventListener('click', modalOutsideClick);
-        handleClickClose();
-    };
-
-    const modalOutsideClick = e => {
-        modalClose(e);
-    };
+            handleClickClose();
+            document.removeEventListener('click', modalClose);
+        },
+        [isShow],
+    );
 
     useEffect(() => {
         if (isShow) {
-            document.addEventListener('click', modalOutsideClick);
+            document.addEventListener('click', modalClose);
         } else {
-            document.removeEventListener('click', modalOutsideClick);
+            document.removeEventListener('click', modalClose);
         }
     }, [isShow]);
 
@@ -42,7 +43,10 @@ const withDialog = WrappedComponent => props => {
                     </Dialog.P_Option>
                 </Dialog.Header>
                 <Dialog.Body>
-                    <WrappedComponent {...componentData} />
+                    <WrappedComponent
+                        modalClose={modalClose}
+                        {...componentData}
+                    />
                 </Dialog.Body>
             </Dialog>
         )

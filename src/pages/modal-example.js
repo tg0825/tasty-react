@@ -41,6 +41,8 @@ const MyPage = () => {
                 modalData={modalData}
                 componentData={{
                     name: formData.name,
+                    count,
+                    setCount,
                     handleClick,
                 }}
             />
