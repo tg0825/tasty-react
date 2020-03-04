@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 
 import Foo from 'Src/views/foo';
-
 import withDialog from 'Src/modals/withDialog';
 
 const Modal = withDialog(Foo);
