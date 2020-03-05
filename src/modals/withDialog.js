@@ -6,6 +6,7 @@ const withDialog = WrappedComponent => props => {
     const { isShow, handleClickClose, modalData, componentData } = props;
     const { title } = modalData;
 
+    // 자식 요소에 function을 넘길 때는 반드시 useCallback을 적용
     // 자식 요소가 업데이트 될 때 함수가 한번만 실행되도록 한다.
     // useCallback이 없으면 자식 요소가 랜더링 될 때 추가적으로 이벤트가 생성 + 추가 된다.
     const modalClose = useCallback(
