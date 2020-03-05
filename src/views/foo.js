@@ -31,6 +31,7 @@ const Foo = props => {
 Foo.propTypes = {
     name: PropTypes.string,
     count: PropTypes.number,
+    setCount: PropTypes.func,
     handleClick: PropTypes.func,
     modalClose: PropTypes.func,
 };
