@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 import HeaderMainNav from './header-main-nav';
 import HeaderSubNav from './header-sub-nav';
 
-import Header from 'Ui/header';
+import Hd from 'Style/header';
 
-const LayoutHeader = () => {
+const Header = () => {
     return (
-        <Header>
-            <Header.Logo as={Link} to="/">
+        <Hd>
+            <Hd.Logo as={Link} to="/">
                 logo
-            </Header.Logo>
+            </Hd.Logo>
             <HeaderMainNav />
             <HeaderSubNav />
-        </Header>
+        </Hd>
     );
 };
 
-export default LayoutHeader;
+export default Header;
