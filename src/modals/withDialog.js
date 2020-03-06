@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import Dialog from 'Ui/dialog';
+import Dialog from 'Style/dialog';
 
 const withDialog = WrappedComponent => props => {
     const node = useRef();

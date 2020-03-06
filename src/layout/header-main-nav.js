@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { getRouteById } from 'Src/routes';
 
-import Header from 'Ui/header';
+import Header from 'Style/header';
 const { MainNav } = Header;
 const gnbIdList = ['shopList', 'add', 'modalexample'];
 

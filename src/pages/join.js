@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as authActions from 'Modules/auth';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
-import { Redirect } from 'react-router-dom';
 
 class UserInfo {
     constructor(values) {
@@ -31,7 +30,7 @@ const joinLogic = values => {
 };
 
 const Join = props => {
-    const { history, logged, login } = props;
+    const { logged, login } = props;
     console.log(logged);
 
     const formData = {
@@ -41,14 +40,6 @@ const Join = props => {
         name: 'myFoo',
         terms: true,
     };
-
-    useEffect(() => {
-        console.log(logged);
-
-        if (logged) {
-            return history.push('/');
-        }
-    }, [logged]);
 
     return (
         <div>
@@ -71,14 +62,11 @@ const Join = props => {
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         const result = joinLogic(values);
-                        login();
-                        // if (result) return history.push('/');
                         setSubmitting(false);
+                        if (result) {
+                            login();
+                        }
                     }, 500);
-                    // setTimeout(() => {
-                    //     console.log(JSON.stringify(values, null, 2));
-                    //     setSubmitting(false);
-                    // }, 400);
                 }}
             >
                 {({ isSubmitting }) => (
@@ -135,7 +123,6 @@ const Join = props => {
 };
 
 Join.propTypes = {
-    history: PropTypes.object,
     logged: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
 };

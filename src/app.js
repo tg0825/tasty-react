@@ -1,6 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Header from './layout/header';
 import Navigation from './layout/navigation';
@@ -15,12 +17,13 @@ const NotFound = () => <div>404</div>;
 
 class App extends React.Component {
     render() {
+        const { logged } = this.props;
         return (
             <div>
                 <Helmet titleTemplate="%s | 맛집" defaultTitle="맛집">
                     <meta name="description" content="사내맛집" />
                 </Helmet>
-                <Header />
+                <Header logged={logged} />
                 <Navigation />
                 <Switch>
                     <Route
@@ -28,11 +31,11 @@ class App extends React.Component {
                         path="/"
                         render={props => <Main {...props} />}
                     />
-                    {routes.map(({ authId, id, path, component }) => {
+                    {routes.map(({ id, path, component }) => {
                         return (
                             <AuthRouters
                                 exact
-                                authId={authId}
+                                logged={logged}
                                 key={id}
                                 id={id}
                                 path={path}
@@ -48,4 +51,12 @@ class App extends React.Component {
     }
 }
 
-export default App;
+App.propTypes = {
+    logged: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = ({ auth }) => ({
+    logged: auth.logged,
+});
+
+export default connect(mapStateToProps)(App);

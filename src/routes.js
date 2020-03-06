@@ -1,6 +1,5 @@
 import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
-import Logout from 'Pages/Logout';
 
 import ShopList from 'Pages/shop/list';
 import ShopDetail from 'Pages/shop/detail';
@@ -25,14 +24,12 @@ const routes = [
         id: 'join',
         name: '회원가입',
         path: '/join',
-        authId: 0,
         component: Join,
     },
     {
         id: 'logout',
         name: '로그아웃',
         path: '/logout',
-        component: Logout,
     },
     {
         id: 'shopList',
