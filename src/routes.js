@@ -1,4 +1,3 @@
-import Main from 'Pages/Main';
 import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
 
@@ -8,13 +7,13 @@ import ShopDetail from 'Pages/shop/detail';
 // etc..
 import ModalExample from 'Pages/modal-example';
 
+// auth
+// 0 user 외부 사용자
+// 1 member 회원가입자
+// 2 admin 사내 시스템 이용자
+// 3 superadmin 시스템 관리자
+
 const routes = [
-    {
-        id: 'main',
-        name: '메인',
-        path: '/',
-        component: Main,
-    },
     {
         id: 'mypage',
         name: '내정보',

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const AuthRoutes = ({ id, component: Component, ...rest }) => {
-    const isAuthenticated = true;
+const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -11,11 +11,7 @@ const AuthRoutes = ({ id, component: Component, ...rest }) => {
                 if (id === 'edit') {
                     props.edit = true;
                 }
-                return !isAuthenticated ? (
-                    <Redirect to="/" />
-                ) : (
-                    <Component {...props} />
-                );
+                return !logged ? <Redirect to="/" /> : <Component {...props} />;
             }}
         />
     );
@@ -23,7 +19,12 @@ const AuthRoutes = ({ id, component: Component, ...rest }) => {
 
 AuthRoutes.propTypes = {
     id: PropTypes.string.isRequired,
+    logged: PropTypes.bool.isRequired,
     component: PropTypes.any.isRequired,
 };
 
-export default AuthRoutes;
+const mapStateToProps = state => ({
+    logged: state.auth.logged,
+});
+
+export default connect(mapStateToProps)(AuthRoutes);

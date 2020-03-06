@@ -9,6 +9,8 @@ import AuthRouters from './auth-routers';
 
 import routes from './routes';
 
+import Main from 'Pages/Main';
+
 const NotFound = () => <div>404</div>;
 
 class App extends React.Component {
@@ -21,6 +23,11 @@ class App extends React.Component {
                 <Header />
                 <Navigation />
                 <Switch>
+                    <Route
+                        exact
+                        path="/"
+                        render={props => <Main {...props} />}
+                    />
                     {routes.map(({ id, path, component }) => {
                         return (
                             <AuthRouters
