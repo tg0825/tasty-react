@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getRouteById } from 'Src/routes';
+import * as authActions from 'Modules/auth';
 
-import Header from 'Ui/header';
+import Header from 'Style/header';
+
 const { SubNav } = Header;
 
 const nav = ['join', 'mypage', 'logout'];
 
 const HeaderSubNav = props => {
-    const { logged } = props;
+    const { logged, logout } = props;
 
     const filterdNav = nav.filter(id => {
         if (logged) {
@@ -29,6 +31,19 @@ const HeaderSubNav = props => {
     return (
         <SubNav>
             {getRouteById(filterdNav).map(nav => {
+                if (nav.id === 'logout') {
+                    return (
+                        <SubNav.Link
+                            key={nav.id}
+                            onClick={e => {
+                                e.preventDefault();
+                                logout();
+                            }}
+                        >
+                            {nav.name}
+                        </SubNav.Link>
+                    );
+                }
                 return (
                     <SubNav.Link as={Link} key={nav.id} to={nav.path}>
                         {nav.name}
@@ -41,10 +56,15 @@ const HeaderSubNav = props => {
 
 HeaderSubNav.propTypes = {
     logged: PropTypes.bool.isRequired,
+    logout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     logged: state.auth.logged,
 });
 
-export default connect(mapStateToProps)(HeaderSubNav);
+const mapDispatchToProps = {
+    logout: authActions.logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderSubNav);
