@@ -32,6 +32,7 @@ Header.SubNav.Link = styled.a`
     display: inline-block;
     margin-left: 20px;
     color: #fff;
+    cursor: pointer;
 `;
 
 export default Header;

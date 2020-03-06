@@ -6,8 +6,8 @@
             "Src/*": [
                 "src/*"
             ],
-            "Ui/*": [
-                "src/ui/*"
+            "Style/*": [
+                "Style/*"
             ],
             "Pages/*": [
                 "src/pages/*"
