@@ -1,3 +1,4 @@
+import Login from 'Pages/login';
 import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
 
@@ -25,6 +26,12 @@ const routes = [
         name: '회원가입',
         path: '/join',
         component: Join,
+    },
+    {
+        id: 'login',
+        name: '로그인',
+        path: '/login',
+        component: Login,
     },
     {
         id: 'logout',

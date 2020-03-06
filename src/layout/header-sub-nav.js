@@ -10,20 +10,18 @@ import Header from 'Style/header';
 
 const { SubNav } = Header;
 
-const nav = ['join', 'mypage', 'logout'];
+const nav = ['join', 'login', 'mypage', 'logout'];
 
 const HeaderSubNav = props => {
     const { logged, logout } = props;
 
     const filterdNav = nav.filter(id => {
         if (logged) {
-            if (id === 'mypage' || id === 'logout') {
-                return true;
-            }
+            if (id === 'mypage' || id === 'logout') return true;
         }
 
         if (!logged) {
-            if (id === 'join') return true;
+            if (id === 'join' || id === 'login') return true;
         }
         return false;
     });

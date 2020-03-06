@@ -11,7 +11,11 @@ const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
                     props.edit = true;
                 }
 
-                if (id === 'join') {
+                if (id === 'shopList' || id === 'detail') {
+                    return <Component {...props} />;
+                }
+
+                if (id === 'join' || id === 'login') {
                     return logged ? (
                         <Redirect to="/" />
                     ) : (
@@ -19,7 +23,11 @@ const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
                     );
                 }
 
-                return !logged ? <Redirect to="/" /> : <Component {...props} />;
+                return !logged ? (
+                    <Redirect to="/login" />
+                ) : (
+                    <Component {...props} />
+                );
             }}
         />
     );
