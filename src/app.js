@@ -28,10 +28,11 @@ class App extends React.Component {
                         path="/"
                         render={props => <Main {...props} />}
                     />
-                    {routes.map(({ id, path, component }) => {
+                    {routes.map(({ authId, id, path, component }) => {
                         return (
                             <AuthRouters
                                 exact
+                                authId={authId}
                                 key={id}
                                 id={id}
                                 path={path}

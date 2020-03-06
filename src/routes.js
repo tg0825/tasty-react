@@ -1,5 +1,6 @@
 import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
+import Logout from 'Pages/Logout';
 
 import ShopList from 'Pages/shop/list';
 import ShopDetail from 'Pages/shop/detail';
@@ -7,7 +8,7 @@ import ShopDetail from 'Pages/shop/detail';
 // etc..
 import ModalExample from 'Pages/modal-example';
 
-// auth
+// authId
 // 0 user 외부 사용자
 // 1 member 회원가입자
 // 2 admin 사내 시스템 이용자
@@ -24,7 +25,14 @@ const routes = [
         id: 'join',
         name: '회원가입',
         path: '/join',
+        authId: 0,
         component: Join,
+    },
+    {
+        id: 'logout',
+        name: '로그아웃',
+        path: '/logout',
+        component: Logout,
     },
     {
         id: 'shopList',

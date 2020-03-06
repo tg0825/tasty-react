@@ -8,18 +8,27 @@ import { getRouteById } from 'Src/routes';
 import Header from 'Ui/header';
 const { SubNav } = Header;
 
+const nav = ['join', 'mypage', 'logout'];
+
 const HeaderSubNav = props => {
     const { logged } = props;
-    const subNavIdList = ['join', 'mypage'].filter(id => {
-        if (!logged) {
-            if (id === 'mypage') return false;
+
+    const filterdNav = nav.filter(id => {
+        if (logged) {
+            if (id === 'mypage' || id === 'logout') {
+                return true;
+            }
         }
-        return true;
+
+        if (!logged) {
+            if (id === 'join') return true;
+        }
+        return false;
     });
 
     return (
         <SubNav>
-            {getRouteById(subNavIdList).map(nav => {
+            {getRouteById(filterdNav).map(nav => {
                 return (
                     <SubNav.Link as={Link} key={nav.id} to={nav.path}>
                         {nav.name}
