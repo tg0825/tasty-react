@@ -30,8 +30,7 @@ const joinLogic = values => {
 };
 
 const Join = props => {
-    const { logged, login } = props;
-    console.log(logged);
+    const { login } = props;
 
     const formData = {
         id: 'foo',
