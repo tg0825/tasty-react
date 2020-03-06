@@ -1,11 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
-class ParseValue {
+class UserInfo {
     constructor(values) {
         this.id = values.id;
         this.pw = values.pw;
@@ -14,21 +14,24 @@ class ParseValue {
 }
 
 const joinLogic = values => {
-    console.log(values);
-    const user = new ParseValue(values);
-    const users = JSON.parse(localStorage.getItem('users_temp')) || [];
-
-    localStorage.setItem('users_temp', JSON.stringify([...users, user]));
-    localStorage.setItem('user', JSON.stringify(user));
-
     // 값 채크
+    // 기존 유저와 아이디 닉네임 매칭 여부
     // 완료시 로컬스토리지에 아이디 저장
     // 로그인 여부 및 데이터 저장
     // 메인 페이지로 이동
+    const userInfo = new UserInfo(values);
+    const userList = JSON.parse(localStorage.getItem('userList')) || [];
+
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('userList', JSON.stringify([...userList, userInfo]));
+
     return true;
 };
 
-const Join = () => {
+const Join = props => {
+    const { history, logged } = props;
+    console.log(logged);
+
     const formData = {
         id: 'foo',
         pw: '123',
@@ -58,7 +61,7 @@ const Join = () => {
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
                         const result = joinLogic(values);
-                        if (result) return <Redirect to="/" />;
+                        if (result) return history.push('/');
                         setSubmitting(false);
                     }, 500);
                     // setTimeout(() => {
@@ -120,6 +123,14 @@ const Join = () => {
     );
 };
 
-Join.propTypes = {};
+Join.propTypes = {
+    history: PropTypes.object,
+};
 
-export default Join;
+const mapStateToProps = state => ({
+    logged: state.auth.logged,
+});
+
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Join);
