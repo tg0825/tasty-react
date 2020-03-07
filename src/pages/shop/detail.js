@@ -123,7 +123,7 @@ class Post extends React.Component {
             } else {
                 return (
                     <span>
-                        <Link to={`/post/${this.id}/edit`}>수정</Link>
+                        <Link to={`/shop/${this.id}/edit`}>수정</Link>
                         <Link to="#" onClick={() => this.delete(this.id)}>
                             삭제
                         </Link>
