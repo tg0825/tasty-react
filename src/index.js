@@ -5,12 +5,16 @@ import 'normalize.css';
 import './css/index.scss';
 
 import { createStore, applyMiddleware } from 'redux';
-import modules from './modules';
 
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
+import modules from './modules';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const store = createStore(modules, applyMiddleware(ReduxThunk));
+const store = createStore(
+    modules,
+    composeWithDevTools(applyMiddleware(ReduxThunk)),
+);
 
 import App from './app.js';
 import { ThemeProvider } from 'styled-components';
