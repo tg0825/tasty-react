@@ -3,7 +3,6 @@ import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
 
 import ShopList from 'Pages/shop/list';
-import ShopEdit from 'Src/pages/shop/edit';
 import ShopDetail from 'Src/pages/shop/detail';
 
 // etc..
@@ -49,13 +48,13 @@ const routes = [
         id: 'add',
         name: '등록',
         path: '/shop/add',
-        component: ShopEdit,
+        component: ShopDetail,
     },
     {
         id: 'edit',
         name: '수정',
-        path: '/shop/:postId/detail',
-        component: ShopEdit,
+        path: '/shop/:postId/edit',
+        component: ShopDetail,
     },
     {
         id: 'detail',

@@ -51,7 +51,7 @@ export const deleteShop = id => () =>
         alert('done');
     });
 
-export const asyncGetShop = id => dispatch =>
+export const asyncGetShop = ({ id }) => dispatch =>
     axios.get(`${api.domain}/posts/${id}`).then(res => {
         dispatch(getShops(res));
         return res;

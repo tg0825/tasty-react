@@ -39,17 +39,17 @@ class Post extends React.Component {
     }
 
     componentDidMount() {
+        const { asyncGetShop, item } = this.props;
+
         if (this.id) {
-            this.props
-                .asyncGetShops({
-                    id: this.id,
-                })
-                .then(res => {
-                    this.setState({
-                        ...res,
-                        loading: false,
-                    });
+            asyncGetShop({
+                id: this.id,
+            }).then(res => {
+                this.setState({
+                    ...res.data,
+                    loading: false,
                 });
+            });
         }
     }
 
@@ -208,7 +208,7 @@ class Post extends React.Component {
 Post.propTypes = {
     edit: PropTypes.bool,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
-    asyncGetShops: PropTypes.func.isRequired,
+    asyncGetShop: PropTypes.func.isRequired,
     deleteShop: PropTypes.func.isRequired,
     postShop: PropTypes.func.isRequired,
     patchShop: PropTypes.func.isRequired,
@@ -220,12 +220,12 @@ Post.defaultProps = {
 
 const mapStateToProps = state => {
     return {
-        post: state.shop.selectedItem,
+        item: state.shop.item,
     };
 };
 
 const mapDispatchToProps = {
-    asyncGetShops: shopActions.asyncGetShops,
+    asyncGetShop: shopActions.asyncGetShop,
     postShop: shopActions.asyncPostShop,
     patchShop: shopActions.patchShop,
     deleteShop: shopActions.deleteShop,
