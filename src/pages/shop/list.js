@@ -6,9 +6,8 @@ import { Helmet } from 'react-helmet';
 
 import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
-import Loader from 'Style/loader';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Loader from 'Comp/loader';
 
 class ShopList extends React.Component {
     constructor(props) {
@@ -55,16 +54,10 @@ class ShopList extends React.Component {
         };
 
         return !items.data ? (
-            <Loader>
-                <FontAwesomeIcon icon="coffee" />
-            </Loader>
+            <Loader />
         ) : (
             <div>
-                {loading && (
-                    <Loader>
-                        <FontAwesomeIcon icon="coffee" />
-                    </Loader>
-                )}
+                {loading && <Loader />}
                 {helmet()}
                 <div className="post-list">{this.renderList(items.data)}</div>
                 <Pagination
