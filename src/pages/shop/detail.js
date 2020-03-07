@@ -28,27 +28,37 @@ const Content = styled.textarea`
 class Post extends React.Component {
     constructor(props) {
         super(props);
+        this.id = props.match.params.postId;
         this.state = {
             isEdit: props.edit,
             redirect: false,
             title: '',
             body: '',
             loading: true,
+            item: props.item,
         };
-        this.id = props.match.params.postId;
     }
 
     componentDidMount() {
-        const { asyncGetShop, item } = this.props;
+        const { asyncGetShop } = this.props;
 
         if (this.id) {
             asyncGetShop({
                 id: this.id,
-            }).then(res => {
+            }).then(() => {
                 this.setState({
-                    ...res.data,
                     loading: false,
                 });
+            });
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        // 전형적인 사용 사례 (props 비교를 잊지 마세요)
+        if (this.props.item !== prevProps.item) {
+            this.setState({
+                ...this.state,
+                ...this.props.item.data,
             });
         }
     }
@@ -166,7 +176,7 @@ class Post extends React.Component {
                         />
                     </div>
                     <div className="post-button">
-                        <Link to="/posts">맛집 목록</Link>
+                        <Link to="/shop/list">목록</Link>
                         {displayBtns()}
                     </div>
                 </form>
@@ -212,6 +222,7 @@ Post.propTypes = {
     deleteShop: PropTypes.func.isRequired,
     postShop: PropTypes.func.isRequired,
     patchShop: PropTypes.func.isRequired,
+    item: PropTypes.object,
 };
 
 Post.defaultProps = {

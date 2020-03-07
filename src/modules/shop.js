@@ -37,8 +37,6 @@ export const patchShop = payload => dispatch =>
             },
         })
         .then(res => {
-            console.log(res);
-
             dispatch({
                 type: PATCH,
                 payload,
@@ -53,7 +51,7 @@ export const deleteShop = id => () =>
 
 export const asyncGetShop = ({ id }) => dispatch =>
     axios.get(`${api.domain}/posts/${id}`).then(res => {
-        dispatch(getShops(res));
+        dispatch(getShop(res));
         return res;
     });
 
