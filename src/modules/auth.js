@@ -1,4 +1,4 @@
-// 음식점 모듈
+// 인증
 // import axios from 'axios';
 
 const initialState = {
@@ -21,7 +21,7 @@ export const logout = () => ({
 });
 
 // Reducer
-const shop = (state = initialState, action) => {
+const auth = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -35,4 +35,4 @@ const shop = (state = initialState, action) => {
     }
 };
 
-export default shop;
+export default auth;

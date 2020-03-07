@@ -7,16 +7,23 @@ import { Helmet } from 'react-helmet';
 import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
 
-class Posts extends React.Component {
+class ShopList extends React.Component {
     constructor(props) {
         super(props);
         this.page = 1;
+        this.state = {
+            loading: true,
+        };
     }
 
     componentDidMount() {
         const { asyncGetShops } = this.props;
 
-        asyncGetShops();
+        asyncGetShops().then(() => {
+            this.setState({
+                loading: false,
+            });
+        });
     }
 
     renderList = list => (
@@ -33,7 +40,7 @@ class Posts extends React.Component {
 
     render() {
         const { items, asyncGetShops } = this.props;
-        const { data = [] } = items;
+        const { loading } = this.state;
 
         const helmet = () => {
             return (
@@ -44,14 +51,12 @@ class Posts extends React.Component {
             );
         };
 
-        if (!data.length) return null;
-
-        return (
+        return !items.data || loading ? (
+            <div>loading..</div>
+        ) : (
             <div>
                 {helmet()}
-                <div className="post-list">
-                    {data.length === 0 ? null : this.renderList(data)}
-                </div>
+                <div className="post-list">{this.renderList(items.data)}</div>
                 <Pagination
                     paginationData={items}
                     onClickPageBtn={pageData => {
@@ -64,8 +69,9 @@ class Posts extends React.Component {
     }
 }
 
-Posts.propTypes = {
+ShopList.propTypes = {
     asyncGetShops: PropTypes.func.isRequired,
+    asyncGetShop: PropTypes.func.isRequired,
     items: PropTypes.any.isRequired,
 };
 
@@ -75,6 +81,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
     asyncGetShops: shopActions.asyncGetShops,
+    asyncGetShop: shopActions.asyncGetShop,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopList);

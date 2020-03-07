@@ -1,18 +1,25 @@
 // 음식점 모듈
 import axios from 'axios';
+import { api } from './config';
 
 const initialState = {
     items: {},
-    selectedItem: {},
+    item: {},
 };
 
 // Actions
 const GET = '/shops/GET';
+const GET_ITEM = '/shops/GET_ITEM';
 const POST = '/shops/POST';
 const PATCH = '/shops/PATCH';
 // const DELETE_SHOP = 'DELETE_SHOP';
 
 // Actions Creator
+export const getShop = payload => ({
+    type: GET_ITEM,
+    payload,
+});
+
 export const getShops = payload => ({
     type: GET,
     payload,
@@ -24,15 +31,11 @@ export const postShop = () => ({
 
 export const patchShop = payload => dispatch =>
     axios
-        .patch(
-            `https://jsonplaceholder.typicode.com/posts/${payload.id}`,
-            JSON.stringify(payload),
-            {
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                },
+        .patch(`${api.domain}/posts/${payload.id}`, JSON.stringify(payload), {
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
             },
-        )
+        })
         .then(res => {
             console.log(res);
 
@@ -43,9 +46,15 @@ export const patchShop = payload => dispatch =>
         });
 
 export const deleteShop = id => () =>
-    axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`).then(res => {
+    axios.get(`${api.domain}/posts/${id}`).then(res => {
         console.log(res);
         alert('done');
+    });
+
+export const asyncGetShop = id => dispatch =>
+    axios.get(`${api.domain}/posts/${id}`).then(res => {
+        dispatch(getShops(res));
+        return res;
     });
 
 export const asyncGetShops = (payload = {}) => dispatch => {
@@ -57,14 +66,9 @@ export const asyncGetShops = (payload = {}) => dispatch => {
     );
 
     return axios
-        .get(
-            `https://jsonplaceholder.typicode.com/posts${
-                params.id ? '/' + params.id : ''
-            }`,
-            {
-                params: params,
-            },
-        )
+        .get(`${api.domain}/posts${params.id ? '/' + params.id : ''}`, {
+            params: params,
+        })
         .then(res => {
             dispatch(getShops(res));
             return res;
@@ -84,6 +88,11 @@ const shop = (state = initialState, action) => {
             return {
                 ...state,
                 items: action.payload,
+            };
+        case GET_ITEM:
+            return {
+                ...state,
+                item: action.payload,
             };
         default:
             return state;

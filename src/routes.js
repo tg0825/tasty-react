@@ -3,7 +3,8 @@ import Join from 'Pages/join';
 import MyPage from 'Pages/mypage';
 
 import ShopList from 'Pages/shop/list';
-import ShopDetail from 'Pages/shop/detail';
+import ShopEdit from 'Src/pages/shop/edit';
+import ShopDetail from 'Src/pages/shop/detail';
 
 // etc..
 import ModalExample from 'Pages/modal-example';
@@ -48,18 +49,18 @@ const routes = [
         id: 'add',
         name: '등록',
         path: '/shop/add',
-        component: ShopDetail,
-    },
-    {
-        id: 'detail',
-        name: '상세',
-        path: '/shop/:postId',
-        component: ShopDetail,
+        component: ShopEdit,
     },
     {
         id: 'edit',
         name: '수정',
         path: '/shop/:postId/detail',
+        component: ShopEdit,
+    },
+    {
+        id: 'detail',
+        name: '상세',
+        path: '/shop/:postId',
         component: ShopDetail,
     },
     {
