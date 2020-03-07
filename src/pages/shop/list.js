@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 
 import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
+import Loader from 'Style/loader';
 
 class ShopList extends React.Component {
     constructor(props) {
@@ -51,10 +52,11 @@ class ShopList extends React.Component {
             );
         };
 
-        return !items.data || loading ? (
-            <div>loading..</div>
+        return !items.data ? (
+            <Loader>loading</Loader>
         ) : (
             <div>
+                {loading && <Loader>loading111</Loader>}
                 {helmet()}
                 <div className="post-list">{this.renderList(items.data)}</div>
                 <Pagination
