@@ -5,12 +5,13 @@ import HeaderMainNav from './header-main-nav';
 import HeaderSubNav from './header-sub-nav';
 
 import Hd from 'Style/header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = () => {
     return (
         <Hd>
             <Hd.Logo as={Link} to="/">
-                logo
+                <FontAwesomeIcon icon="pizza-slice" />
             </Hd.Logo>
             <HeaderMainNav />
             <HeaderSubNav />
