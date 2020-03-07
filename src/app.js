@@ -24,6 +24,7 @@ class App extends React.Component {
             <div>
                 <Helmet titleTemplate="%s | 맛집" defaultTitle="맛집">
                     <meta name="description" content="사내맛집" />
+                    <meta name="viewport" content="width=device-width" />
                 </Helmet>
                 <Header logged={logged} />
                 <Navigation />
