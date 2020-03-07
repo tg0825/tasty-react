@@ -8,6 +8,8 @@ import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
 import Loader from 'Style/loader';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 class ShopList extends React.Component {
     constructor(props) {
         super(props);
@@ -53,10 +55,16 @@ class ShopList extends React.Component {
         };
 
         return !items.data ? (
-            <Loader>loading</Loader>
+            <Loader>
+                <FontAwesomeIcon icon="coffee" />
+            </Loader>
         ) : (
             <div>
-                {loading && <Loader>loading111</Loader>}
+                {loading && (
+                    <Loader>
+                        <FontAwesomeIcon icon="coffee" />
+                    </Loader>
+                )}
                 {helmet()}
                 <div className="post-list">{this.renderList(items.data)}</div>
                 <Pagination

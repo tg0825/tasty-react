@@ -13,6 +13,8 @@ import routes from './routes';
 
 import Main from 'Pages/Main';
 
+import './fa-library';
+
 const NotFound = () => <div>404</div>;
 
 class App extends React.Component {
