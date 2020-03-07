@@ -61,7 +61,14 @@ class ShopList extends React.Component {
                     paginationData={items}
                     onClickPageBtn={pageData => {
                         this.page = pageData._page;
-                        asyncGetShops(Object.assign({}, pageData));
+                        this.setState({
+                            loading: true,
+                        });
+                        asyncGetShops(Object.assign({}, pageData)).then(() => {
+                            this.setState({
+                                loading: false,
+                            });
+                        });
                     }}
                 />
             </div>
