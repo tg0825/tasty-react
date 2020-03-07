@@ -25,17 +25,20 @@ const Content = styled.textarea`
     }
 `;
 
-class Post extends React.Component {
+class ShopDetail extends React.Component {
     constructor(props) {
         super(props);
-        this.id = props.match.params.postId;
+        const { match } = props;
+        const { edit } = match.params;
+        const isEdit = edit === 'edit' ? true : false;
+        this.id = match.params.postId;
         this.state = {
-            isEdit: props.edit,
             redirect: false,
             title: '',
             body: '',
             loading: true,
             item: props.item,
+            isEdit,
         };
     }
 
@@ -73,14 +76,15 @@ class Post extends React.Component {
 
     handlePatch = () => {
         const { title, body } = this.state;
+        const { history } = this.props;
         this.props
             .patchShop({
                 id: this.id,
                 title,
                 body,
             })
-            .then(res => {
-                this.setState(res);
+            .then(() => {
+                history.goBack();
             });
     };
 
@@ -97,10 +101,10 @@ class Post extends React.Component {
     };
 
     showPost = () => {
-        const { id } = this;
-        const { isEdit = false, title, body } = this.state;
+        const { id, state } = this;
+        const { title, body } = this.state;
         // const { patchShop } = this.props;
-        const isRead = !id || isEdit ? false : true;
+        const isRead = !id || state.isEdit ? false : true;
 
         const displayBtns = () => {
             // 최초 등록
@@ -113,7 +117,7 @@ class Post extends React.Component {
             }
 
             // 수정
-            if (isEdit) {
+            if (state.isEdit) {
                 return (
                     <button type="button" onClick={this.handlePatch}>
                         수정 완료
@@ -215,7 +219,7 @@ class Post extends React.Component {
     }
 }
 
-Post.propTypes = {
+ShopDetail.propTypes = {
     edit: PropTypes.bool,
     match: PropTypes.objectOf(PropTypes.any).isRequired,
     asyncGetShop: PropTypes.func.isRequired,
@@ -223,9 +227,10 @@ Post.propTypes = {
     postShop: PropTypes.func.isRequired,
     patchShop: PropTypes.func.isRequired,
     item: PropTypes.object,
+    history: PropTypes.object,
 };
 
-Post.defaultProps = {
+ShopDetail.defaultProps = {
     edit: false,
 };
 
@@ -242,4 +247,4 @@ const mapDispatchToProps = {
     deleteShop: shopActions.deleteShop,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopDetail);

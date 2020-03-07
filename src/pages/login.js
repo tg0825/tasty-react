@@ -10,8 +10,8 @@ const Login = props => {
     const { login } = props;
 
     const formData = {
-        id: '',
-        pw: '',
+        id: 'tg0825',
+        pw: '111',
     };
 
     return (

@@ -53,7 +53,7 @@ const routes = [
     {
         id: 'edit',
         name: '수정',
-        path: '/shop/:postId/edit',
+        path: '/shop/:postId/:edit',
         component: ShopDetail,
     },
     {

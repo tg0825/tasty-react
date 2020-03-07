@@ -7,10 +7,6 @@ const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
         <Route
             {...rest}
             render={props => {
-                if (id === 'edit') {
-                    props.edit = true;
-                }
-
                 if (id === 'shopList' || id === 'detail') {
                     return <Component {...props} />;
                 }

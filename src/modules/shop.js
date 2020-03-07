@@ -39,13 +39,12 @@ export const patchShop = payload => dispatch =>
         .then(res => {
             dispatch({
                 type: PATCH,
-                payload,
+                payload: res.data,
             });
         });
 
 export const deleteShop = id => () =>
     axios.get(`${api.domain}/posts/${id}`).then(res => {
-        console.log(res);
         alert('done');
     });
 
@@ -88,6 +87,11 @@ const shop = (state = initialState, action) => {
                 items: action.payload,
             };
         case GET_ITEM:
+            return {
+                ...state,
+                item: action.payload,
+            };
+        case PATCH:
             return {
                 ...state,
                 item: action.payload,
