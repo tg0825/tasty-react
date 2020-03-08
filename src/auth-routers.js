@@ -2,25 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
-const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
+const AuthRoutes = ({ auth, id, component: Component, ...rest }) => {
+    const { logged, logoutPath } = auth;
     return (
         <Route
             {...rest}
             render={props => {
+                const { location } = props;
+                const pathname = location.state ? location.state.referrer : '/';
+
+                // 로그아웃일 경우는 메인페이지로 이동
+                if (logged === false && logoutPath) {
+                    return <Redirect to={logoutPath} />;
+                }
+
                 if (id === 'shopList' || id === 'detail') {
                     return <Component {...props} />;
                 }
 
                 if (id === 'join' || id === 'login') {
                     return logged ? (
-                        <Redirect to="/" />
+                        <Redirect to={pathname} />
                     ) : (
                         <Component {...props} />
                     );
                 }
 
                 return !logged ? (
-                    <Redirect to="/login" />
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { referrer: location },
+                        }}
+                    />
                 ) : (
                     <Component {...props} />
                 );
@@ -31,8 +45,9 @@ const AuthRoutes = ({ logged, id, component: Component, ...rest }) => {
 
 AuthRoutes.propTypes = {
     id: PropTypes.string.isRequired,
-    logged: PropTypes.bool.isRequired,
+    auth: PropTypes.object.isRequired,
     component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    location: PropTypes.object,
 };
 
 export default AuthRoutes;

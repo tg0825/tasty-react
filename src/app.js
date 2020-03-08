@@ -19,7 +19,7 @@ const NotFound = () => <div>404</div>;
 
 class App extends React.Component {
     render() {
-        const { logged } = this.props;
+        const { auth } = this.props;
         return (
             <div>
                 <Helmet titleTemplate="%s | 맛집" defaultTitle="맛집">
@@ -29,7 +29,7 @@ class App extends React.Component {
                         content="width=device-width, user-scalable=no"
                     />
                 </Helmet>
-                <Header logged={logged} />
+                <Header />
                 <Navigation />
                 <Switch>
                     <Route
@@ -41,7 +41,7 @@ class App extends React.Component {
                         return (
                             <AuthRouters
                                 exact
-                                logged={logged}
+                                auth={auth}
                                 key={id}
                                 id={id}
                                 path={path}
@@ -58,11 +58,11 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-    logged: PropTypes.bool.isRequired,
+    auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = ({ auth }) => ({
-    logged: auth.logged,
+    auth,
 });
 
 export default connect(mapStateToProps)(App);
