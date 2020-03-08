@@ -43,10 +43,7 @@ export const patchShop = payload => dispatch =>
             });
         });
 
-export const deleteShop = id => () =>
-    axios.get(`${api.domain}/posts/${id}`).then(res => {
-        alert('done');
-    });
+export const deleteShop = id => () => axios.get(`${api.domain}/posts/${id}`);
 
 export const asyncGetShop = ({ id }) => dispatch =>
     axios.get(`${api.domain}/posts/${id}`).then(res => {

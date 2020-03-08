@@ -3,18 +3,13 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const AuthRoutes = ({ auth, id, component: Component, ...rest }) => {
-    const { logged, logoutPath } = auth;
+    const { logged } = auth;
     return (
         <Route
             {...rest}
             render={props => {
                 const { location } = props;
                 const pathname = location.state ? location.state.referrer : '/';
-
-                // 로그아웃일 경우는 메인페이지로 이동
-                if (logged === false && logoutPath) {
-                    return <Redirect to={logoutPath} />;
-                }
 
                 if (id === 'shopList' || id === 'detail') {
                     return <Component {...props} />;

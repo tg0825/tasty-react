@@ -3,7 +3,6 @@
 
 const initialState = {
     logged: false,
-    logoutPath: null,
     userInfo: {},
 };
 
@@ -32,7 +31,6 @@ const auth = (state = initialState, action) => {
         case LOGOUT:
             return {
                 ...initialState,
-                logoutPath: '/',
             };
         default:
             return state;

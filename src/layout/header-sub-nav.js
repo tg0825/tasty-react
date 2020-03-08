@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getRouteById } from 'Src/routes';
@@ -14,6 +14,7 @@ const nav = ['join', 'login', 'mypage', 'logout'];
 
 const HeaderSubNav = props => {
     const { logged, logout } = props;
+    const history = useHistory();
 
     const filterdNav = nav.filter(id => {
         if (logged) {
@@ -36,6 +37,7 @@ const HeaderSubNav = props => {
                             onClick={e => {
                                 e.preventDefault();
                                 logout();
+                                history.push('/');
                             }}
                         >
                             {nav.name}

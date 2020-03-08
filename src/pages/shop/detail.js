@@ -91,8 +91,6 @@ class ShopDetail extends React.Component {
     delete = id => {
         if (!confirm('삭제 하시겠습니까?')) return false;
         this.props.deleteShop(id).then(res => {
-            console.log(res);
-
             alert('삭제 되었습니다.');
             this.setState({
                 redirect: true,
@@ -210,6 +208,7 @@ class ShopDetail extends React.Component {
         if (redirect) {
             return <Redirect to="/" />;
         }
+
         return (
             <div>
                 {this.helmet()}
