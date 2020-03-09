@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-import Loader from '../src/components/loader';
+import Loader from 'Comp/loader';
 
 export default {
     title: 'Loader',

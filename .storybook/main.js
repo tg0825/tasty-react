@@ -8,7 +8,8 @@ module.exports = {
     return Object.assign(config, {
       resolve: {
         alias: {
-          Style: path.resolve(__dirname, '../src/style'),
+          Style: path.resolve(__dirname, '../src/style/'),
+          Comp: path.resolve(__dirname, '../src/components/'),
         },
         extensions: ['.js', '.jsx'],
       }
