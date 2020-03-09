@@ -16,7 +16,7 @@ const PageBtn = styled.button`
     }
 `;
 
-const PaginationUi = styled.div`
+const StPagination = styled.div`
     margin-top: 20px;
     text-align: center;
 `;
@@ -81,7 +81,7 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
 
     const render = () => {
         return (
-            <PaginationUi>
+            <StPagination>
                 <PageBtn
                     onClick={() => {
                         handleClickPageBtn(1);
@@ -121,7 +121,7 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                 >
                     &gt; &gt;
                 </PageBtn>
-            </PaginationUi>
+            </StPagination>
         );
     };
 

@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint src",
     "dev": "webpack-dev-server --hot --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -57,6 +59,10 @@
     "yup": "^0.28.1"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addons": "^5.3.14",
+    "@storybook/react": "^5.3.14",
     "webpack-cli": "^3.3.9"
   }
 }
