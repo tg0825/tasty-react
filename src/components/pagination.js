@@ -1,25 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const PageBtn = styled.button`
-    box-sizing: border-box;
-    display: inline-block;
-    min-width: 32px;
-    padding: 2px;
-    margin: 0 2px;
-
-    &.active {
-        padding: 1px;
-        border: 1px solid ${props => props.theme.mainColor};
-        color: ${props => props.theme.mainColor};
-    }
-`;
-
-const StPagination = styled.div`
-    margin-top: 20px;
-    text-align: center;
-`;
+import StPage from 'Style/pagination';
 
 const Pagination = ({ paginationData, onClickPageBtn }) => {
     if (!paginationData) return null;
@@ -65,7 +46,7 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
         const links = [];
         for (let i = startPage; i <= endPage; i += 1) {
             links.push(
-                <PageBtn
+                <StPage.Btn
                     className={currentPage === i && 'active'}
                     key={i}
                     onClick={() => {
@@ -73,7 +54,7 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                     }}
                 >
                     {i}
-                </PageBtn>,
+                </StPage.Btn>,
             );
         }
         return links;
@@ -81,8 +62,8 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
 
     const render = () => {
         return (
-            <StPagination>
-                <PageBtn
+            <StPage>
+                <StPage.Btn
                     onClick={() => {
                         handleClickPageBtn(1);
                     }}
@@ -90,8 +71,8 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                     disabled={firstPage}
                 >
                     &lt; &lt;
-                </PageBtn>
-                <PageBtn
+                </StPage.Btn>
+                <StPage.Btn
                     onClick={() => {
                         handleClickPageBtn(currentPage - 1);
                     }}
@@ -99,11 +80,11 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                     type="button"
                 >
                     &lt;
-                </PageBtn>
+                </StPage.Btn>
 
                 {renderPageLinkBtn()}
 
-                <PageBtn
+                <StPage.Btn
                     onClick={() => {
                         handleClickPageBtn(currentPage + 1);
                     }}
@@ -111,8 +92,8 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                     type="button"
                 >
                     &gt;
-                </PageBtn>
-                <PageBtn
+                </StPage.Btn>
+                <StPage.Btn
                     onClick={() => {
                         handleClickPageBtn(totalPage);
                     }}
@@ -120,8 +101,8 @@ const Pagination = ({ paginationData, onClickPageBtn }) => {
                     type="button"
                 >
                     &gt; &gt;
-                </PageBtn>
-            </StPagination>
+                </StPage.Btn>
+            </StPage>
         );
     };
 
