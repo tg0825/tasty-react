@@ -6,6 +6,19 @@ import * as authActions from 'Modules/auth';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
+let currentUser = null;
+
+const getUserById = id => {
+    const ls = JSON.parse(localStorage.getItem('userList'));
+    return ls.some(user => {
+        if (user.id === id) {
+            currentUser = user;
+            return true;
+        }
+        return false;
+    });
+};
+
 class UserInfo {
     constructor(values) {
         this.id = values.id;
@@ -50,6 +63,13 @@ const Join = props => {
                     id: Yup.string()
                         .min(3)
                         .max(15)
+                        .test(
+                            'checkId',
+                            '사용할 수 없는 아이디 입니다.',
+                            value => {
+                                return !getUserById(value);
+                            },
+                        )
                         .required(),
                     pw: Yup.string().required(),
                     pwCk: Yup.string()
