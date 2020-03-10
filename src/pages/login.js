@@ -6,6 +6,13 @@ import * as authActions from 'Modules/auth';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
+const getUserById = id => {
+    const ls = JSON.parse(localStorage.getItem('userList'));
+    return ls.some(user => {
+        return user.id === id;
+    });
+};
+
 const Login = props => {
     const { login } = props;
 
@@ -24,6 +31,9 @@ const Login = props => {
                     id: Yup.string()
                         .min(3)
                         .max(15)
+                        .test('checkId', '아이디를 확인해 주세요.', value => {
+                            return getUserById(value);
+                        })
                         .required(),
                     pw: Yup.string().required(),
                 })}
