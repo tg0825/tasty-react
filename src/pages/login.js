@@ -6,11 +6,21 @@ import * as authActions from 'Modules/auth';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
+let currentUser = null;
+
 const getUserById = id => {
     const ls = JSON.parse(localStorage.getItem('userList'));
     return ls.some(user => {
-        return user.id === id;
+        if (user.id === id) {
+            currentUser = user;
+            return true;
+        }
+        return false;
     });
+};
+
+const checkPw = (user, pw) => {
+    return user.pw === pw;
 };
 
 const Login = props => {
@@ -30,16 +40,24 @@ const Login = props => {
                 validationSchema={Yup.object({
                     id: Yup.string()
                         .min(3)
-                        .max(15)
-                        .test('checkId', '아이디를 확인해 주세요.', value => {
-                            return getUserById(value);
-                        })
+                        .max(20)
                         .required(),
                     pw: Yup.string().required(),
                 })}
-                onSubmit={(values, { setSubmitting }) => {
+                onSubmit={(values, { setFieldError, setSubmitting }) => {
                     setTimeout(() => {
                         setSubmitting(false);
+                        if (!getUserById(values.id)) {
+                            setFieldError('id', '아이디를 확인해주세요.');
+                            setSubmitting(false);
+
+                            return false;
+                        }
+                        if (!checkPw(currentUser, values.pw)) {
+                            setFieldError('pw', '비밀번호를 확인해주세요.');
+                            return false;
+                        }
+
                         login();
                     }, 500);
                 }}
