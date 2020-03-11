@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
 import * as shopActions from 'Modules/shop';
 import Pagination from 'Comp/pagination';
 
 import Loader from 'Comp/loader';
+
+const EmptyTable = styled.div`
+    height: 300px;
+`;
 
 class ShopList extends React.Component {
     constructor(props) {
@@ -15,6 +20,7 @@ class ShopList extends React.Component {
         this.page = 1;
         this.state = {
             loading: true,
+            init: true,
         };
     }
 
@@ -24,6 +30,7 @@ class ShopList extends React.Component {
         asyncGetShops().then(() => {
             this.setState({
                 loading: false,
+                init: false,
             });
         });
     }
@@ -42,7 +49,7 @@ class ShopList extends React.Component {
 
     render() {
         const { items, asyncGetShops } = this.props;
-        const { loading } = this.state;
+        const { loading, init } = this.state;
 
         const helmet = () => {
             return (
@@ -53,8 +60,11 @@ class ShopList extends React.Component {
             );
         };
 
-        return !items.data ? (
-            <Loader />
+        return init ? (
+            <EmptyTable>
+                <Loader />
+                로딩중...
+            </EmptyTable>
         ) : (
             <div>
                 {loading && <Loader />}
