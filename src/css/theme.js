@@ -1,20 +1,22 @@
 const theme = {
     mainColor: 'red',
+    subColor: 'orange',
     dangerColor: 'blue',
     successColor: 'gray',
     keyColor: 'rgb(255, 44, 17)',
-    // Color
+
+    // font-color
     fontColorBase: '#333',
 
-    // Size
+    // font-size
     fontSize: '24px',
 
-    // Radisu
+    // border-radius
     radius: {
         default: '10px',
     },
 
-    // Shadow
+    // box-shadow
     boxShadow: {
         default: '0 20px 20px rgba(0, 0, 0, 0.2)',
     },

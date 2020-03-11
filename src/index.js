@@ -20,11 +20,13 @@ import App from './app.js';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import theme from 'Src/css/theme.js';
+import GlobalStyle from 'Style/global-style';
 
 ReactDom.render(
     <Provider store={store}>
         <BrowserRouter>
             <ThemeProvider theme={theme}>
+                <GlobalStyle />
                 <App />
             </ThemeProvider>
         </BrowserRouter>
