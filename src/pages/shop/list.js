@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 
 import * as shopActions from 'Modules/shop';
+import CardList from 'Comp/card-list';
 import Pagination from 'Comp/pagination';
-
 import Loader from 'Comp/loader';
 
 const EmptyTable = styled.div`
@@ -35,18 +34,6 @@ class ShopList extends React.Component {
         });
     }
 
-    renderList = list => (
-        <div>
-            {list.map(({ id, title }, idx) => (
-                <div key={idx}>
-                    <Link to={`/shop/${id}`}>
-                        {id}:{title}
-                    </Link>
-                </div>
-            ))}
-        </div>
-    );
-
     render() {
         const { items, asyncGetShops } = this.props;
         const { loading, init } = this.state;
@@ -69,7 +56,7 @@ class ShopList extends React.Component {
             <div>
                 {loading && <Loader />}
                 {helmet()}
-                <div className="post-list">{this.renderList(items.data)}</div>
+                <CardList loading={loading} init={init} items={items} />
                 <Pagination
                     paginationData={items}
                     onClickPageBtn={pageData => {

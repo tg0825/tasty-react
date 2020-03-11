@@ -60,7 +60,7 @@ export const asyncGetShops = (payload = {}) => dispatch => {
     );
 
     return axios
-        .get(`${api.domain}/posts${params.id ? '/' + params.id : ''}`, {
+        .get(`${api.domain}/photos${params.id ? '/' + params.id : ''}`, {
             params: params,
         })
         .then(res => {
