@@ -22,6 +22,19 @@ import { BrowserRouter } from 'react-router-dom';
 import theme from 'Src/css/theme.js';
 import GlobalStyle from 'Style/global-style';
 
+import { LOGIN } from 'Modules/auth';
+
+const userInfo = localStorage.getItem('userInfo');
+if (userInfo) {
+    store.dispatch({
+        type: LOGIN,
+        payload: {
+            userInfo,
+            logged: true,
+        },
+    });
+}
+
 ReactDom.render(
     <Provider store={store}>
         <BrowserRouter>

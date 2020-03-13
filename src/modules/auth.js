@@ -7,7 +7,7 @@ const initialState = {
 };
 
 // Actions
-const LOGIN = '/auth/LOGIN';
+export const LOGIN = '/auth/LOGIN';
 const LOGOUT = '/auth/LOGOUT';
 
 class UserInfo {
