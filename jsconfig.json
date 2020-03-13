@@ -17,6 +17,9 @@
             ],
             "Modules/*": [
                 "src/modules/*"
+            ],
+            "Service/*": [
+                "src/service/*"
             ]
         }
     }

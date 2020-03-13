@@ -103,6 +103,7 @@ module.exports = (env, options) => {
                 Pages: path.resolve(__dirname, 'src/pages/'),
                 Comp: path.resolve(__dirname, 'src/components/'),
                 Modules: path.resolve(__dirname, 'src/modules/'),
+                Service: path.resolve(__dirname, 'src/service/'),
             },
             extensions: ['.js', '.jsx'],
         },
