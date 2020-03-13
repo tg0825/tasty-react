@@ -28,7 +28,7 @@ const Content = styled.textarea`
 class ShopDetail extends React.Component {
     constructor(props) {
         super(props);
-        const { match } = props;
+        const { match, auth } = props;
         const { edit } = match.params;
         const isEdit = edit === 'edit' ? true : false;
         this.id = match.params.postId;
@@ -121,8 +121,9 @@ class ShopDetail extends React.Component {
                         수정 완료
                     </button>
                 );
-                // 보기
-            } else {
+            }
+            // 보기
+            if (state.logged) {
                 return (
                     <span>
                         <Link to={`/shop/${this.id}/edit`}>수정</Link>
@@ -147,7 +148,14 @@ class ShopDetail extends React.Component {
                     }}
                 >
                     <div>
-                        제목:
+                        <div>
+                            <img src="/images/image.jpg" alt="" />
+                        </div>
+                    </div>
+
+                    <div>star component</div>
+
+                    <div>
                         <TitleInput
                             type="text"
                             name="title"
@@ -160,6 +168,28 @@ class ShopDetail extends React.Component {
                             }}
                             readOnly={isRead}
                         />
+                    </div>
+
+                    <div>일식</div>
+                    <div>
+                        <div>메뉴</div>
+                        <ul>
+                            <li>
+                                <div>
+                                    <img src="/images/image.jpg" alt="" />
+                                </div>
+                                <div>초밥 9p</div>
+                                <div>8,000원</div>
+                            </li>
+                            <li>
+                                <div>초밥 12p</div>
+                                <div>12,000원</div>
+                            </li>
+                            <li>
+                                <div>우동</div>
+                                <div>8,000원</div>
+                            </li>
+                        </ul>
                     </div>
                     <div>
                         본문:
@@ -177,6 +207,9 @@ class ShopDetail extends React.Component {
                             readOnly={isRead}
                         />
                     </div>
+
+                    <div>review list</div>
+
                     <div className="post-button">
                         <Link to="/shop/list">목록</Link>
                         {displayBtns()}
@@ -236,6 +269,7 @@ ShopDetail.defaultProps = {
 const mapStateToProps = state => {
     return {
         item: state.shop.item,
+        logged: state.auth.logged,
     };
 };
 
