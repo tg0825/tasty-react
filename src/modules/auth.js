@@ -10,15 +10,32 @@ const initialState = {
 const LOGIN = '/auth/LOGIN';
 const LOGOUT = '/auth/LOGOUT';
 
-// Actions Creator
-export const login = payload => ({
-    type: LOGIN,
-    payload,
-});
+class UserInfo {
+    constructor(values) {
+        this.id = values.id;
+        this.pw = values.pw;
+        this.name = values.name;
+    }
+}
 
-export const logout = () => ({
-    type: LOGOUT,
-});
+// Actions Creator
+export const login = values => {
+    const userInfo = new UserInfo(values);
+    const userList = JSON.parse(localStorage.getItem('userList')) || [];
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('userList', JSON.stringify([...userList, userInfo]));
+    return {
+        type: LOGIN,
+        userInfo,
+    };
+};
+
+export const logout = () => {
+    localStorage.removeItem('userInfo');
+    return {
+        type: LOGOUT,
+    };
+};
 
 // Reducer
 const auth = (state = initialState, action) => {
@@ -26,6 +43,7 @@ const auth = (state = initialState, action) => {
         case LOGIN:
             return {
                 ...state,
+                userInfo: action.userInfo,
                 logged: true,
             };
         case LOGOUT:

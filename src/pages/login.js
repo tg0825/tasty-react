@@ -5,23 +5,7 @@ import * as authActions from 'Modules/auth';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
-
-let currentUser = null;
-
-const getUserById = id => {
-    const ls = JSON.parse(localStorage.getItem('userList'));
-    return ls.some(user => {
-        if (user.id === id) {
-            currentUser = user;
-            return true;
-        }
-        return false;
-    });
-};
-
-const checkPw = (user, pw) => {
-    return user.pw === pw;
-};
+import { validLogin } from 'Src/service/auth';
 
 const Login = props => {
     const { login } = props;
@@ -47,18 +31,16 @@ const Login = props => {
                 onSubmit={(values, { setFieldError, setSubmitting }) => {
                     setTimeout(() => {
                         setSubmitting(false);
-                        if (!getUserById(values.id)) {
-                            setFieldError('id', '아이디를 확인해주세요.');
-                            setSubmitting(false);
+                        let result = validLogin(values);
+                        console.log(result);
 
+                        if (result.state === 'error') {
+                            result.data.forEach(item => {
+                                setFieldError(item.name, item.message);
+                            });
                             return false;
                         }
-                        if (!checkPw(currentUser, values.pw)) {
-                            setFieldError('pw', '비밀번호를 확인해주세요.');
-                            return false;
-                        }
-
-                        login();
+                        login(values);
                     }, 500);
                 }}
             >

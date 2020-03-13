@@ -6,41 +6,7 @@ import * as authActions from 'Modules/auth';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import Yup from '../localization';
 
-let currentUser = null;
-
-const getUserById = id => {
-    const ls = JSON.parse(localStorage.getItem('userList'));
-    return ls.some(user => {
-        if (user.id === id) {
-            currentUser = user;
-            return true;
-        }
-        return false;
-    });
-};
-
-class UserInfo {
-    constructor(values) {
-        this.id = values.id;
-        this.pw = values.pw;
-        this.name = values.name;
-    }
-}
-
-const joinLogic = values => {
-    // 값 채크
-    // 기존 유저와 아이디 닉네임 매칭 여부
-    // 완료시 로컬스토리지에 아이디 저장
-    // 로그인 여부 및 데이터 저장
-    // 메인 페이지로 이동
-    const userInfo = new UserInfo(values);
-    const userList = JSON.parse(localStorage.getItem('userList')) || [];
-
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
-    localStorage.setItem('userList', JSON.stringify([...userList, userInfo]));
-
-    return true;
-};
+import { getUserById } from 'Service/auth';
 
 const Join = props => {
     const { login } = props;
@@ -80,11 +46,8 @@ const Join = props => {
                 })}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                        const result = joinLogic(values);
                         setSubmitting(false);
-                        if (result) {
-                            login();
-                        }
+                        login(values);
                     }, 500);
                 }}
             >
