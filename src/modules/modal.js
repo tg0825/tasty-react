@@ -2,18 +2,22 @@
 const OPEN_MODAL = 'OPEN_MODAL';
 const CLOSE_MODAL = 'CLOSE_MODAL';
 
-const initialState = {
-    items: [],
-    selectedItem: {},
-};
+// {
+//     imageModal: true,
+//     fooModal: false
+//     barModal: false
+// }
+
+const initialState = {};
 
 export const openModal = payload => ({
     type: OPEN_MODAL,
     payload,
 });
 
-export const closeModal = () => ({
+export const closeModal = payload => ({
     type: CLOSE_MODAL,
+    payload,
 });
 
 // reducer
@@ -22,12 +26,12 @@ const modal = (state = initialState, action) => {
         case OPEN_MODAL:
             return {
                 ...state,
-                items: action.payload,
+                [action.payload]: true,
             };
         case CLOSE_MODAL:
             return {
                 ...state,
-                items: action.payload,
+                [action.payload]: true,
             };
         default:
             return state;

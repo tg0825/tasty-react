@@ -6,11 +6,15 @@ import Card from 'Comp/card-v';
 import StCardVList from 'Style/card-v-list';
 
 const CardVList = props => {
-    const { items } = props;
+    const { items, handleClickImage } = props;
     return (
         <StCardVList>
             {items.map(item => (
-                <Card key={item.name} item={item} />
+                <Card
+                    key={item.name}
+                    item={item}
+                    handleClickImage={handleClickImage}
+                />
             ))}
         </StCardVList>
     );
@@ -18,6 +22,7 @@ const CardVList = props => {
 
 CardVList.propTypes = {
     items: PropTypes.array.isRequired,
+    handleClickImage: PropTypes.func.isRequired,
 };
 
 CardVList.defaultProps = {

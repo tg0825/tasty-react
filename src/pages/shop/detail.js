@@ -2,11 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as shopActions from 'Modules/shop';
+import * as modalActions from 'Modules/modal';
 import styled from 'styled-components';
 import { Link, Redirect } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
 import CardVList from 'Src/components/card-v-list';
+import ImageModal from 'Src/views/image-modal';
+import withDialog from 'Src/modals/withDialog';
+
+const Modal = withDialog(ImageModal);
 
 const TitleInput = styled.input`
     width: 300px;
@@ -33,6 +38,7 @@ class ShopDetail extends React.Component {
         const { edit } = match.params;
         const isEdit = edit === 'edit' ? true : false;
         this.id = match.params.postId;
+        this.imageSrc = '';
         this.state = {
             redirect: false,
             title: '',
@@ -97,6 +103,14 @@ class ShopDetail extends React.Component {
                 redirect: true,
             });
         });
+    };
+
+    /**
+     * 카드 이미지 클릭 핸들러
+     */
+    handleClickImage = e => {
+        this.imageSrc = e.target.src;
+        this.props.openModal('imageModal');
     };
 
     showPost = () => {
@@ -195,6 +209,7 @@ class ShopDetail extends React.Component {
                     <div>
                         <div>메뉴</div>
                         <CardVList
+                            handleClickImage={this.handleClickImage}
                             items={[
                                 {
                                     name: '초밥',
@@ -232,6 +247,7 @@ class ShopDetail extends React.Component {
 
     render() {
         const { redirect, loading } = this.state;
+        const { modalList } = this.props;
 
         if (this.id && loading) {
             return (
@@ -246,10 +262,18 @@ class ShopDetail extends React.Component {
             return <Redirect to="/" />;
         }
 
+        console.log(1);
+
         return (
             <div>
                 {this.helmet()}
                 {this.showPost()}
+                <Modal
+                    isShow={modalList.imageModal}
+                    componentData={{
+                        imageSrc: this.imageSrc,
+                    }}
+                />
             </div>
         );
     }
@@ -262,8 +286,11 @@ ShopDetail.propTypes = {
     deleteShop: PropTypes.func.isRequired,
     postShop: PropTypes.func.isRequired,
     patchShop: PropTypes.func.isRequired,
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
     item: PropTypes.object,
     history: PropTypes.object,
+    modalList: PropTypes.object,
 };
 
 ShopDetail.defaultProps = {
@@ -274,6 +301,7 @@ const mapStateToProps = state => {
     return {
         item: state.shop.item,
         logged: state.auth.logged,
+        modalList: state.modal,
     };
 };
 
@@ -282,6 +310,8 @@ const mapDispatchToProps = {
     postShop: shopActions.asyncPostShop,
     patchShop: shopActions.patchShop,
     deleteShop: shopActions.deleteShop,
+    openModal: modalActions.openModal,
+    closeModal: modalActions.closeModal,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopDetail);
