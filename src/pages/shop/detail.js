@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Link, Redirect } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
+import CardVList from 'Src/components/card-v-list';
 
 const TitleInput = styled.input`
     width: 300px;
@@ -28,7 +29,7 @@ const Content = styled.textarea`
 class ShopDetail extends React.Component {
     constructor(props) {
         super(props);
-        const { match, auth } = props;
+        const { match } = props;
         const { edit } = match.params;
         const isEdit = edit === 'edit' ? true : false;
         this.id = match.params.postId;
@@ -104,7 +105,7 @@ class ShopDetail extends React.Component {
         // const { patchShop } = this.props;
         const isRead = !id || state.isEdit ? false : true;
 
-        const displayBtns = () => {
+        const renderBtns = () => {
             // 최초 등록
             if (!id) {
                 return (
@@ -122,6 +123,7 @@ class ShopDetail extends React.Component {
                     </button>
                 );
             }
+
             // 보기
             if (state.logged) {
                 return (
@@ -155,7 +157,10 @@ class ShopDetail extends React.Component {
 
                     <div>star component</div>
 
+                    <div>일식</div>
+
                     <div>
+                        <div>가게 이름</div>
                         <TitleInput
                             type="text"
                             name="title"
@@ -170,29 +175,8 @@ class ShopDetail extends React.Component {
                         />
                     </div>
 
-                    <div>일식</div>
                     <div>
-                        <div>메뉴</div>
-                        <ul>
-                            <li>
-                                <div>
-                                    <img src="/images/image.jpg" alt="" />
-                                </div>
-                                <div>초밥 9p</div>
-                                <div>8,000원</div>
-                            </li>
-                            <li>
-                                <div>초밥 12p</div>
-                                <div>12,000원</div>
-                            </li>
-                            <li>
-                                <div>우동</div>
-                                <div>8,000원</div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        본문:
+                        <div>설명</div>
                         <Content
                             rows="10"
                             type="text"
@@ -208,11 +192,31 @@ class ShopDetail extends React.Component {
                         />
                     </div>
 
-                    <div>review list</div>
+                    <div>
+                        <div>메뉴</div>
+                        <CardVList
+                            items={[
+                                {
+                                    name: '초밥',
+                                    desc: '신선한 ㅇㅇ로 한 초밥',
+                                    price: '12,000',
+                                },
+                                {
+                                    name: '우동',
+                                    desc: '국물이 시원한 우동',
+                                    price: '8000',
+                                },
+                            ]}
+                        />
+                    </div>
+
+                    <div>
+                        <div>후기</div>
+                    </div>
 
                     <div className="post-button">
                         <Link to="/shop/list">목록</Link>
-                        {displayBtns()}
+                        {renderBtns()}
                     </div>
                 </form>
             </div>
