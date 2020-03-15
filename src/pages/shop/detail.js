@@ -8,10 +8,10 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { Helmet } from 'react-helmet';
 import CardVList from 'Src/components/card-v-list';
-import ImageModal from 'Src/views/image-modal';
+import ImageZoom from 'Src/views/image-zoom';
 import withDialog from 'Src/modals/withDialog';
 
-const Modal = withDialog(ImageModal);
+const Modal = withDialog(ImageZoom);
 
 const TitleInput = styled.input`
     width: 300px;
@@ -165,7 +165,7 @@ class ShopDetail extends React.Component {
                 >
                     <div>
                         <div>
-                            <img src="/images/image.jpg" alt="" />
+                            <img src="/images/image0.jpg" alt="" />
                         </div>
                     </div>
 
@@ -212,12 +212,20 @@ class ShopDetail extends React.Component {
                             handleClickImage={this.handleClickImage}
                             items={[
                                 {
+                                    imgSrc: '/images/image0.jpg',
                                     name: '초밥',
                                     desc: '신선한 ㅇㅇ로 한 초밥',
                                     price: '12,000',
                                 },
                                 {
+                                    imgSrc: '/images/image1.jpg',
                                     name: '우동',
+                                    desc: '국물이 시원한 우동',
+                                    price: '8000',
+                                },
+                                {
+                                    imgSrc: '/images/image2.jpg',
+                                    name: '회',
                                     desc: '국물이 시원한 우동',
                                     price: '8000',
                                 },
@@ -247,7 +255,7 @@ class ShopDetail extends React.Component {
 
     render() {
         const { redirect, loading } = this.state;
-        const { modalList } = this.props;
+        const { modalList, closeModal } = this.props;
 
         if (this.id && loading) {
             return (
@@ -262,14 +270,18 @@ class ShopDetail extends React.Component {
             return <Redirect to="/" />;
         }
 
-        console.log(1);
-
         return (
             <div>
                 {this.helmet()}
                 {this.showPost()}
                 <Modal
                     isShow={modalList.imageModal}
+                    handleClickClose={() => {
+                        closeModal('imageModal');
+                    }}
+                    modalData={{
+                        title: '확대보기',
+                    }}
                     componentData={{
                         imageSrc: this.imageSrc,
                     }}

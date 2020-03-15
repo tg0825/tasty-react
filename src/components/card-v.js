@@ -10,7 +10,7 @@ const CardV = props => {
             <StCardV.Head>
                 <img
                     onClick={e => handleClickImage(e)}
-                    src="/images/image.jpg"
+                    src={item.imgSrc}
                     alt=""
                 />
             </StCardV.Head>

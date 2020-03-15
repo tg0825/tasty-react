@@ -17,7 +17,6 @@ const Foo = props => {
             <div>
                 <button
                     onClick={() => {
-                        // console.log(e);
                         handleClick();
                     }}
                 >

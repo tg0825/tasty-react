@@ -31,7 +31,7 @@ const modal = (state = initialState, action) => {
         case CLOSE_MODAL:
             return {
                 ...state,
-                [action.payload]: true,
+                [action.payload]: false,
             };
         default:
             return state;

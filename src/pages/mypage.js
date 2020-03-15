@@ -29,7 +29,7 @@ const MyPage = () => {
                     <Form autoComplete="off">
                         <div className="input-text">
                             <div>
-                                <img src="/images/image.jpg" alt="" />
+                                <img src="/images/image0.jpg" alt="" />
                             </div>
                         </div>
                         <div className="input-text">

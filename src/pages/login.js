@@ -32,7 +32,6 @@ const Login = props => {
                     setTimeout(() => {
                         setSubmitting(false);
                         let result = validLogin(values);
-                        console.log(result);
 
                         if (result.state === 'error') {
                             result.data.forEach(item => {

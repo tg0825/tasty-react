@@ -3,7 +3,12 @@ import Dialog from 'Style/dialog';
 
 const withDialog = WrappedComponent => props => {
     const node = useRef();
-    const { isShow, handleClickClose, modalData = {}, componentData } = props;
+    const {
+        isShow,
+        handleClickClose = () => {},
+        modalData = {},
+        componentData,
+    } = props;
     const { title = '' } = modalData;
 
     // 자식 요소에 function을 넘길 때는 반드시 useCallback을 적용
@@ -31,21 +36,27 @@ const withDialog = WrappedComponent => props => {
     }, [isShow]);
 
     return isShow ? (
-        <Dialog ref={node}>
-            <Dialog.Header>
-                <div>{title}</div>
-                <Dialog.P_Option
-                    onClick={() => {
-                        modalClose();
-                    }}
-                >
-                    close btn
-                </Dialog.P_Option>
-            </Dialog.Header>
-            <Dialog.Body>
-                <WrappedComponent modalClose={modalClose} {...componentData} />
-            </Dialog.Body>
-        </Dialog>
+        <>
+            <Dialog ref={node}>
+                <Dialog.Header>
+                    <div>{title}</div>
+                    <Dialog.P_Option
+                        onClick={() => {
+                            modalClose();
+                        }}
+                    >
+                        close btn
+                    </Dialog.P_Option>
+                </Dialog.Header>
+                <Dialog.Body>
+                    <WrappedComponent
+                        modalClose={modalClose}
+                        {...componentData}
+                    />
+                </Dialog.Body>
+            </Dialog>
+            <Dialog.Mask onClick={() => modalClose()} />
+        </>
     ) : null;
 };
 
